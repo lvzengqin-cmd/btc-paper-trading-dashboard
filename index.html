@@ -158,9 +158,16 @@
                 <div class="card-header">
                     <div class="card-title">🚨 所有信号记录</div>
                     <div style="font-size: 0.85em; color: #888;">
-                        <span style="color: #00ff88;">● 强烈做多</span> 
-                        <span style="color: #ff4757; margin-left: 10px;">● 强烈做空</span>
-                        <span style="color: #ffa502; margin-left: 10px;">● 轻仓</span>
+                        <div style="margin-bottom: 8px;"><strong>信号来源:</strong></div>
+                        <span style="background: rgba(0,212,255,0.2); color: #00d4ff; padding: 2px 8px; border-radius: 4px; font-size: 0.75em;">5分钟周期监控</span> 
+                        <span style="background: rgba(255,165,2,0.2); color: #ffa502; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; margin-left: 5px;">30分钟周期监控</span>
+                        <span style="background: rgba(123,44,191,0.2); color: #b8a0ff; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; margin-left: 5px;">多周期监控</span>
+                        <span style="background: rgba(0,255,136,0.2); color: #00ff88; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; margin-left: 5px;">LSTM AI分析</span>
+                        <div style="margin-top: 10px;">
+                            <span style="color: #00ff88;">● 强烈做多</span> 
+                            <span style="color: #ff4757; margin-left: 10px;">● 强烈做空</span>
+                            <span style="color: #ffa502; margin-left: 10px;">● 轻仓</span>
+                        </div>
                     </div>
                 </div>
                 <div class="signal-list" id="allSignals">
@@ -560,12 +567,32 @@
                 
                 const strengthBadge = s.strength ? `<span class="signal-strength">强度 ${s.strength}/5</span>` : '';
                 
+                // 信号来源标识
+                let sourceBadge = '';
+                let sourceIcon = '';
+                if (s.source === '5min') {
+                    sourceBadge = '<span style="background: rgba(0,212,255,0.2); color: #00d4ff; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; margin-left: 8px;">5分钟周期监控</span>';
+                    sourceIcon = '⚡';
+                } else if (s.source === '30min') {
+                    sourceBadge = '<span style="background: rgba(255,165,2,0.2); color: #ffa502; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; margin-left: 8px;">30分钟周期监控</span>';
+                    sourceIcon = '📅';
+                } else if (s.source === 'multiframe') {
+                    sourceBadge = '<span style="background: rgba(123,44,191,0.2); color: #b8a0ff; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; margin-left: 8px;">多周期监控</span>';
+                    sourceIcon = '📊';
+                } else if (s.source === 'lstm') {
+                    sourceBadge = '<span style="background: rgba(0,255,136,0.2); color: #00ff88; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; margin-left: 8px;">LSTM AI分析</span>';
+                    sourceIcon = '🤖';
+                } else {
+                    sourceBadge = `<span style="background: rgba(136,136,136,0.2); color: #888; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; margin-left: 8px;">${s.source || '未知'}</span>`;
+                    sourceIcon = '❓';
+                }
+                
                 return `
                     <div class="signal-item ${className}" style="${bgStyle}">
                         <div class="signal-time">${date}<br>${time}</div>
                         <div class="signal-content">
-                            <div class="signal-type">${typeText} ${strengthBadge}</div>
-                            <div class="signal-price">${s.source === '5min' ? '⚡ 5分钟' : s.source === '30min' ? '📅 30分钟' : '📊 多周期'} | 价格: $${s.price?.toFixed(2) || '--'}</div>
+                            <div class="signal-type">${typeText} ${strengthBadge} ${sourceBadge}</div>
+                            <div class="signal-price">${sourceIcon} 价格: $${s.price?.toFixed(2) || '--'} | 置信度: ${s.confidence || 'medium'}</div>
                         </div>
                     </div>
                 `;

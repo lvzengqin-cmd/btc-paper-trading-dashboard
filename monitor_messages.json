@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-03-03T01:10:38.643652",
+    "source": "5min",
+    "type": "status",
+    "content": "当前信号: ⏸️ 观望（5分钟周期）\n原因: 无高概率信号"
+  },
+  {
+    "timestamp": "2026-03-03T01:09:57.791856",
+    "source": "30min",
+    "type": "signal",
+    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🔥 强烈做多（30分钟周期）\n\n💰 当前价格: $69,288.00\n📊 信号强度: 5/5\n🎚️ 置信度: high\n\n📈 趋势状态:\n  大周期: bullish (4H:bullish, 30M:bullish, 15M:bullish)\n  1分钟: bearish (RSI: 34.3)\n\n📋 做单理由:\n  1. 大周期看涨(4H:bullish, 30M:bullish, 15M:bullish)\n  2. RSI超卖(34.3)\n  3. 触及布林下轨($69210)\n  4. 接近近期低点($69254)\n\n📊 24h统计: 涨跌 +4.77%\n\n⏰ 01:09:57\n⚠️ 仅供参考，不构成投资建议"
+  },
+  {
     "timestamp": "2026-03-03T01:05:58.980111",
     "source": "30min",
     "type": "signal",

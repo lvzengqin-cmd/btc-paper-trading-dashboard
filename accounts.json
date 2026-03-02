@@ -42,9 +42,23 @@
         "timestamp": "2026-03-02T19:41:10",
         "result": "profit",
         "profit": 100
+      },
+      {
+        "type": "open",
+        "direction": "long",
+        "price": 69288.0,
+        "amount": 166.66666666666669,
+        "timestamp": "2026-03-03T01:13:14.788969",
+        "signal_strength": 5
       }
     ],
-    "active_position": null,
+    "active_position": {
+      "direction": "long",
+      "entry_price": 69288.0,
+      "amount": 166.66666666666669,
+      "open_time": "2026-03-03T01:13:14.788956",
+      "signal_strength": 5
+    },
     "daily_stats": {
       "2026-03-02": {
         "trades": 1,

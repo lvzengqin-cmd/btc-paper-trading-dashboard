@@ -869,49 +869,6 @@
             });
         }
         
-        // 更新信号列表（所有信号历史）
-                    let signalText = '';
-                    let signalColor = '';
-                    
-                    switch(latestSignal.signal_type) {
-                        case 'strong_long':
-                            signalText = '🔥 强烈做多';
-                            signalColor = '#00ff88';
-                            break;
-                        case 'strong_short':
-                            signalText = '🔥 强烈做空';
-                            signalColor = '#ff4757';
-                            break;
-                        case 'long':
-                            signalText = '🟢 做多';
-                            signalColor = '#00ff88';
-                            break;
-                        case 'short':
-                            signalText = '🔴 做空';
-                            signalColor = '#ff4757';
-                            break;
-                        case 'neutral':
-                            signalText = '⏸️ 观望';
-                            signalColor = '#888';
-                            break;
-                        default:
-                            signalText = '⏸️ 无信号';
-                            signalColor = '#888';
-                    }
-                    
-                    typeEl.innerHTML = `<span style="color: ${signalColor}; font-weight: 600;">${signalText}</span>`;
-                    
-                    const timeStr = new Date(latestSignal.timestamp).toLocaleTimeString('zh-CN', {hour: '2-digit', minute:'2-digit'});
-                    const strengthStr = latestSignal.strength ? `强度 ${latestSignal.strength}/5` : '';
-                    detailEl.innerHTML = `${timeStr} | $${latestSignal.price?.toFixed(2) || '--'} ${strengthStr}`;
-                } else {
-                    // 无信号
-                    typeEl.innerHTML = '<span style="color: #666;">⏸️ 无信号</span>';
-                    detailEl.innerHTML = '等待交易机会...';
-                }
-            });
-        }
-        
         // 更新监控消息
         async function updateMonitorMessages() {
             try {

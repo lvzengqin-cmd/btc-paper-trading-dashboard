@@ -11,15 +11,13 @@
         .header-content { max-width: 1600px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .header h1 { font-size: 1.8em; background: linear-gradient(90deg, #00d4ff, #7b2cbf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .container { max-width: 1600px; margin: 0 auto; padding: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 20px; width: 100%; }
         @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
-        @media (max-width: 1200px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { .grid-3 { grid-template-columns: 1fr; } }
+        .full-width { grid-column: 1 / -1; width: 100%; }
         .card { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .card-title { font-size: 1.1em; font-weight: 600; }
-        .signal-panel { grid-column: 1 / -1; }
+        .signal-panel { width: 100%; }
         .signal-list { max-height: 400px; overflow-y: auto; }
         .signal-item { display: flex; align-items: center; padding: 12px; margin-bottom: 8px; background: rgba(0,0,0,0.2); border-radius: 10px; border-left: 4px solid #888; }
         .signal-item.strong-long { border-left-color: #00ff88; background: linear-gradient(90deg, rgba(0,255,136,0.1), transparent); }

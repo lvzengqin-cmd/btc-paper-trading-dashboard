@@ -16,18 +16,24 @@
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .card-title { font-size: 1.1em; font-weight: 600; }
         .signal-panel { grid-column: 1 / -1; }
-        .signal-list { max-height: 300px; overflow-y: auto; }
+        .signal-list { max-height: 400px; overflow-y: auto; }
         .signal-item { display: flex; align-items: center; padding: 12px; margin-bottom: 8px; background: rgba(0,0,0,0.2); border-radius: 10px; border-left: 4px solid #888; }
         .signal-item.strong-long { border-left-color: #00ff88; background: linear-gradient(90deg, rgba(0,255,136,0.1), transparent); }
         .signal-item.strong-short { border-left-color: #ff4757; background: linear-gradient(90deg, rgba(255,71,87,0.1), transparent); }
-        .signal-time { font-size: 0.75em; color: #888; min-width: 60px; }
+        .signal-item.light-long { border-left-color: #ffa502; background: linear-gradient(90deg, rgba(255,165,2,0.1), transparent); }
+        .signal-item.light-short { border-left-color: #ffa502; background: linear-gradient(90deg, rgba(255,165,2,0.1), transparent); }
+        .signal-time { font-size: 0.75em; color: #888; min-width: 80px; }
         .signal-content { flex: 1; margin: 0 15px; }
         .signal-type { font-weight: 600; }
+        .signal-price { font-size: 0.85em; color: #aaa; }
+        .signal-strength { padding: 4px 10px; border-radius: 12px; font-size: 0.75em; font-weight: 600; background: rgba(255,255,255,0.1); }
         .account-balance { font-size: 2em; font-weight: 700; }
         .profit { color: #00ff88; }
         .loss { color: #ff4757; }
         .account-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
         .stat-box { text-align: center; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        .stat-value { font-size: 1.3em; font-weight: 700; }
+        .stat-label { font-size: 0.75em; color: #888; margin-top: 4px; }
         .position-badge { padding: 4px 12px; border-radius: 12px; font-size: 0.8em; }
         .badge-long { background: rgba(0,255,136,0.2); color: #00ff88; }
         .badge-short { background: rgba(255,71,87,0.2); color: #ff4757; }
@@ -37,6 +43,15 @@
         .tab.active { border-bottom-color: #00d4ff; color: #00d4ff; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
+        .daily-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px; }
+        .daily-card { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; }
+        .daily-title { font-size: 0.9em; color: #888; margin-bottom: 10px; }
+        .daily-value { font-size: 1.5em; font-weight: 700; }
+        .trade-list { max-height: 300px; overflow-y: auto; }
+        .trade-item { display: flex; justify-content: space-between; padding: 10px; margin-bottom: 5px; background: rgba(0,0,0,0.15); border-radius: 8px; }
+        .trade-win { border-left: 3px solid #00ff88; }
+        .trade-loss { border-left: 3px solid #ff4757; }
+        .countdown { font-size: 0.85em; color: #ffa502; }
     </style>
 </head>
 <body>
@@ -50,16 +65,19 @@
     <div class="container">
         <div class="tabs">
             <div class="tab active" onclick="switchTab('dashboard')">📈 实时看板</div>
-            <div class="tab" onclick="switchTab('history')">📝 历史记录</div>
+            <div class="tab" onclick="switchTab('signals')">🚨 信号记录</div>
+            <div class="tab" onclick="switchTab('daily')">📅 每日统计</div>
+            <div class="tab" onclick="switchTab('trades')">💰 交易记录</div>
         </div>
         
         <div id="dashboard" class="tab-content active">
             <div class="card signal-panel">
                 <div class="card-header">
                     <div class="card-title">🚨 实时信号流</div>
+                    <span style="font-size: 0.85em; color: #888;">最新 50 条</span>
                 </div>
                 <div class="signal-list" id="signalList">
-                    <div style="text-align: center; color: #666; padding: 40px;">等待信号...</div>
+                    <div style="text-align: center; color: #666; padding: 40px;">加载中...</div>
                 </div>
             </div>
             
@@ -68,24 +86,25 @@
                     <div class="card-header">
                         <div class="card-title">⚡ 5分钟事件合约</div>
                     </div>
-                    <div class="account-balance" id="balance5min">1000.00</div>
-                    <div id="pnl5min">+0.00 USDT</div>
+                    <div class="account-balance" id="balance5min">--</div>
+                    <div id="pnl5min">--</div>
                     <div class="account-stats">
                         <div class="stat-box">
-                            <div id="trades5min">0</div>
-                            <div style="font-size: 0.75em; color: #888;">总交易</div>
+                            <div class="stat-value" id="trades5min">--</div>
+                            <div class="stat-label">总交易</div>
                         </div>
                         <div class="stat-box">
-                            <div class="profit" id="wins5min">0</div>
-                            <div style="font-size: 0.75em; color: #888;">盈利</div>
+                            <div class="stat-value profit" id="wins5min">--</div>
+                            <div class="stat-label">盈利</div>
                         </div>
                         <div class="stat-box">
-                            <div class="loss" id="losses5min">0</div>
-                            <div style="font-size: 0.75em; color: #888;">亏损</div>
+                            <div class="stat-value loss" id="losses5min">--</div>
+                            <div class="stat-label">亏损</div>
                         </div>
                     </div>
                     <div style="margin-top: 15px;">
-                        状态: <span class="position-badge badge-empty" id="status5min">空仓</span>
+                        状态: <span class="position-badge badge-empty" id="status5min">--</span>
+                        <span class="countdown" id="countdown5min"></span>
                     </div>
                 </div>
                 
@@ -93,36 +112,93 @@
                     <div class="card-header">
                         <div class="card-title">📅 30分钟固定周期</div>
                     </div>
-                    <div class="account-balance" id="balance30min">1000.00</div>
-                    <div id="pnl30min">+0.00 USDT</div>
+                    <div class="account-balance" id="balance30min">--</div>
+                    <div id="pnl30min">--</div>
                     <div class="account-stats">
                         <div class="stat-box">
-                            <div id="trades30min">0</div>
-                            <div style="font-size: 0.75em; color: #888;">总交易</div>
+                            <div class="stat-value" id="trades30min">--</div>
+                            <div class="stat-label">总交易</div>
                         </div>
                         <div class="stat-box">
-                            <div class="profit" id="wins30min">0</div>
-                            <div style="font-size: 0.75em; color: #888;">盈利</div>
+                            <div class="stat-value profit" id="wins30min">--</div>
+                            <div class="stat-label">盈利</div>
                         </div>
                         <div class="stat-box">
-                            <div class="loss" id="losses30min">0</div>
-                            <div style="font-size: 0.75em; color: #888;">亏损</div>
+                            <div class="stat-value loss" id="losses30min">--</div>
+                            <div class="stat-label">亏损</div>
                         </div>
                     </div>
                     <div style="margin-top: 15px;">
-                        状态: <span class="position-badge badge-empty" id="status30min">空仓</span>
+                        状态: <span class="position-badge badge-empty" id="status30min">--</span>
+                        <span class="countdown" id="countdown30min"></span>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div id="history" class="tab-content">
+        <div id="signals" class="tab-content">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">📝 交易历史</div>
+                    <div class="card-title">🚨 所有信号记录</div>
+                    <div style="font-size: 0.85em; color: #888;">
+                        <span style="color: #00ff88;">● 强烈做多</span> 
+                        <span style="color: #ff4757; margin-left: 10px;">● 强烈做空</span>
+                        <span style="color: #ffa502; margin-left: 10px;">● 轻仓</span>
+                    </div>
                 </div>
-                <div id="tradeHistory">
-                    <div style="text-align: center; color: #666; padding: 40px;">暂无交易记录</div>
+                <div class="signal-list" id="allSignals">
+                    <div style="text-align: center; color: #666; padding: 40px;">加载中...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="daily" class="tab-content">
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">📅 今日统计</div>
+                    </div>
+                    <div id="todayStats">
+                        <div class="daily-stats">
+                            <div class="daily-card">
+                                <div class="daily-title">5分钟模拟盘</div>
+                                <div id="today5min">加载中...</div>
+                            </div>
+                            <div class="daily-card">
+                                <div class="daily-title">30分钟模拟盘</div>
+                                <div id="today30min">加载中...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">📆 昨日统计</div>
+                    </div>
+                    <div id="yesterdayStats">
+                        <div class="daily-stats">
+                            <div class="daily-card">
+                                <div class="daily-title">5分钟模拟盘</div>
+                                <div id="yesterday5min">加载中...</div>
+                            </div>
+                            <div class="daily-card">
+                                <div class="daily-title">30分钟模拟盘</div>
+                                <div id="yesterday30min">加载中...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="trades" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">💰 详细交易记录</div>
+                </div>
+                <div class="trade-list" id="tradeList">
+                    <div style="text-align: center; color: #666; padding: 40px;">加载中...</div>
                 </div>
             </div>
         </div>
@@ -168,13 +244,21 @@
                 document.getElementById('losses5min').textContent = losses;
                 
                 const statusEl = document.getElementById('status5min');
+                const countdownEl = document.getElementById('countdown5min');
                 if (acc.active_position) {
                     const isLong = acc.active_position.direction === 'long';
                     statusEl.textContent = isLong ? '做多中' : '做空中';
                     statusEl.className = 'position-badge ' + (isLong ? 'badge-long' : 'badge-short');
+                    // 计算剩余时间
+                    const opened = new Date(acc.active_position.opened_at);
+                    const now = new Date();
+                    const elapsed = (now - opened) / 1000 / 60;
+                    const remaining = Math.max(0, 5 - elapsed);
+                    countdownEl.textContent = ` (剩余 ${remaining.toFixed(1)} 分钟)`;
                 } else {
                     statusEl.textContent = '空仓';
                     statusEl.className = 'position-badge badge-empty';
+                    countdownEl.textContent = '';
                 }
             }
             
@@ -195,18 +279,178 @@
                 document.getElementById('losses30min').textContent = losses;
                 
                 const statusEl = document.getElementById('status30min');
+                const countdownEl = document.getElementById('countdown30min');
                 if (acc.active_position) {
                     const isLong = acc.active_position.direction === 'long';
                     statusEl.textContent = isLong ? '做多中' : '做空中';
                     statusEl.className = 'position-badge ' + (isLong ? 'badge-long' : 'badge-short');
+                    // 计算剩余时间
+                    const opened = new Date(acc.active_position.opened_at);
+                    const now = new Date();
+                    const elapsed = (now - opened) / 1000 / 60;
+                    const remaining = Math.max(0, 30 - elapsed);
+                    countdownEl.textContent = ` (剩余 ${remaining.toFixed(1)} 分钟)`;
                 } else {
                     statusEl.textContent = '空仓';
                     statusEl.className = 'position-badge badge-empty';
+                    countdownEl.textContent = '';
                 }
+            }
+            
+            // 更新信号列表
+            updateSignals(data);
+            
+            // 更新每日统计
+            updateDailyStats(data);
+            
+            // 更新交易记录
+            updateTrades(data);
+        }
+        
+        // 更新信号列表
+        function updateSignals(data) {
+            const signalList = document.getElementById('signalList');
+            const allSignals = document.getElementById('allSignals');
+            
+            // 从 trade_history 中提取信号
+            let signals = [];
+            ['5min', '30min'].forEach(type => {
+                if (data[type] && data[type].trade_history) {
+                    data[type].trade_history.forEach(trade => {
+                        if (trade.type === 'open') {
+                            signals.push({
+                                time: trade.timestamp,
+                                type: type,
+                                direction: trade.direction,
+                                price: trade.price,
+                                isStrong: true
+                            });
+                        }
+                    });
+                }
+            });
+            
+            // 排序并显示
+            signals.sort((a, b) => new Date(b.time) - new Date(a.time));
+            
+            const renderSignal = (s) => {
+                const time = new Date(s.time).toLocaleTimeString('zh-CN');
+                const isLong = s.direction === 'long';
+                const className = s.isStrong ? (isLong ? 'strong-long' : 'strong-short') : (isLong ? 'light-long' : 'light-short');
+                const typeText = s.isStrong ? (isLong ? '🔥 强烈做多' : '🔥 强烈做空') : (isLong ? '🟡 轻仓做多' : '🟡 轻仓做空');
+                return `
+                    <div class="signal-item ${className}">
+                        <div class="signal-time">${time}</div>
+                        <div class="signal-content">
+                            <div class="signal-type">${typeText}</div>
+                            <div class="signal-price">${s.type === '5min' ? '⚡ 5分钟' : '📅 30分钟'} | 价格: $${s.price?.toFixed(2) || '--'}</div>
+                        </div>
+                    </div>
+                `;
+            };
+            
+            if (signals.length > 0) {
+                signalList.innerHTML = signals.slice(0, 10).map(renderSignal).join('');
+                allSignals.innerHTML = signals.map(renderSignal).join('');
+            } else {
+                signalList.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">等待信号...</div>';
+                allSignals.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">暂无信号记录</div>';
             }
         }
         
-        // 初始化
+        // 更新每日统计
+        function updateDailyStats(data) {
+            const today = new Date().toDateString();
+            const yesterday = new Date(Date.now() - 86400000).toDateString();
+            
+            ['5min', '30min'].forEach(type => {
+                if (!data[type]) return;
+                
+                const trades = data[type].trade_history.filter(t => t.type === 'close');
+                
+                // 今日统计
+                const todayTrades = trades.filter(t => new Date(t.timestamp).toDateString() === today);
+                const todayWins = todayTrades.filter(t => t.result === 'profit').length;
+                const todayLosses = todayTrades.filter(t => t.result === 'loss').length;
+                const todayProfit = todayTrades.reduce((sum, t) => sum + (t.profit || 0), 0);
+                
+                document.getElementById(`today${type}`).innerHTML = `
+                    <div class="daily-value">${todayTrades.length} 单</div>
+                    <div style="color: #00ff88;">✅ 盈利: ${todayWins} 单</div>
+                    <div style="color: #ff4757;">❌ 亏损: ${todayLosses} 单</div>
+                    <div style="margin-top: 10px; ${todayProfit >= 0 ? 'color: #00ff88;' : 'color: #ff4757;'}">
+                        盈亏: ${todayProfit >= 0 ? '+' : ''}${todayProfit.toFixed(2)} USDT
+                    </div>
+                `;
+                
+                // 昨日统计
+                const yestTrades = trades.filter(t => new Date(t.timestamp).toDateString() === yesterday);
+                const yestWins = yestTrades.filter(t => t.result === 'profit').length;
+                const yestLosses = yestTrades.filter(t => t.result === 'loss').length;
+                const yestProfit = yestTrades.reduce((sum, t) => sum + (t.profit || 0), 0);
+                
+                if (yestTrades.length > 0) {
+                    document.getElementById(`yesterday${type}`).innerHTML = `
+                        <div class="daily-value">${yestTrades.length} 单</div>
+                        <div style="color: #00ff88;">✅ 盈利: ${yestWins} 单</div>
+                        <div style="color: #ff4757;">❌ 亏损: ${yestLosses} 单</div>
+                        <div style="margin-top: 10px; ${yestProfit >= 0 ? 'color: #00ff88;' : 'color: #ff4757;'}">
+                            盈亏: ${yestProfit >= 0 ? '+' : ''}${yestProfit.toFixed(2)} USDT
+                        </div>
+                    `;
+                } else {
+                    document.getElementById(`yesterday${type}`).innerHTML = '<div style="color: #666;">昨日无交易</div>';
+                }
+            });
+        }
+        
+        // 更新交易记录
+        function updateTrades(data) {
+            const tradeList = document.getElementById('tradeList');
+            let allTrades = [];
+            
+            ['5min', '30min'].forEach(type => {
+                if (data[type] && data[type].trade_history) {
+                    data[type].trade_history.forEach(trade => {
+                        if (trade.type === 'close') {
+                            allTrades.push({
+                                ...trade,
+                                accountType: type
+                            });
+                        }
+                    });
+                }
+            });
+            
+            allTrades.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            if (allTrades.length > 0) {
+                tradeList.innerHTML = allTrades.map(t => {
+                    const time = new Date(t.timestamp).toLocaleString('zh-CN');
+                    const isWin = t.result === 'profit';
+                    return `
+                        <div class="trade-item ${isWin ? 'trade-win' : 'trade-loss'}">
+                            <div>
+                                <div>${t.accountType === '5min' ? '⚡ 5分钟' : '📅 30分钟'} | ${t.direction === 'long' ? '做多' : '做空'}</div>
+                                <div style="font-size: 0.8em; color: #888;">${time}</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: ${isWin ? '#00ff88' : '#ff4757'}; font-weight: 600;">
+                                    ${isWin ? '+' : ''}${t.profit?.toFixed(2) || 0} USDT
+                                </div>
+                                <div style="font-size: 0.8em; color: #888;">
+                                    ${t.result === 'profit' ? '✅ 盈利' : '❌ 亏损'}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                tradeList.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">暂无交易记录</div>';
+            }
+        }
+        
+        // 初始化加载
         loadData();
         setInterval(loadData, 5000); // 每5秒刷新
     </script>

@@ -1,5 +1,35 @@
 [
   {
+    "timestamp": "2026-03-02T22:59:20.071762",
+    "source": "multiframe",
+    "signal_type": "neutral",
+    "direction": "neutral",
+    "price": 66954.3,
+    "strength": 0,
+    "confidence": "medium",
+    "reason": "4H/30M/15M均看涨，但1分钟RSI回落MACD死叉，观望等待"
+  },
+  {
+    "timestamp": "2026-03-02T22:54:20.071758",
+    "source": "30min",
+    "signal_type": "neutral",
+    "direction": "neutral",
+    "price": 66954.3,
+    "strength": 0,
+    "confidence": "low",
+    "reason": "大周期看涨但小周期调整，无高概率入场信号"
+  },
+  {
+    "timestamp": "2026-03-02T22:49:20.071737",
+    "source": "5min",
+    "signal_type": "neutral",
+    "direction": "neutral",
+    "price": 66954.3,
+    "strength": 0,
+    "confidence": "low",
+    "reason": "RSI从超买区回落，MACD形成死叉，建议观望等待更明确的入场点"
+  },
+  {
     "timestamp": "2026-03-02T22:31:13.287362",
     "source": "multiframe",
     "signal_type": "long",

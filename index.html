@@ -889,26 +889,32 @@
                     
                     let sourceIcon = '';
                     let sourceColor = '';
+                    let sourceName = '';
                     switch(msg.source) {
                         case '5min':
                             sourceIcon = '⚡';
                             sourceColor = '#00d4ff';
+                            sourceName = '5分钟监控';
                             break;
                         case '30min':
                             sourceIcon = '📅';
                             sourceColor = '#ffa502';
+                            sourceName = '30分钟监控';
                             break;
                         case 'multiframe':
                             sourceIcon = '📊';
                             sourceColor = '#b8a0ff';
+                            sourceName = '多时间框架分析';
                             break;
                         case 'lstm':
                             sourceIcon = '🤖';
                             sourceColor = '#00ff88';
+                            sourceName = 'AI深度学习预测';
                             break;
                         default:
                             sourceIcon = '📡';
                             sourceColor = '#888';
+                            sourceName = '系统';
                     }
                     
                     let typeBadge = '';
@@ -922,7 +928,7 @@
                         <div style="padding: 12px; margin-bottom: 8px; background: rgba(0,0,0,0.2); border-radius: 8px; border-left: 3px solid ${sourceColor};">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
                                 <div>
-                                    <span style="color: ${sourceColor};">${sourceIcon} ${msg.source}</span>
+                                    <span style="color: ${sourceColor};">${sourceIcon} ${sourceName}</span>
                                     ${typeBadge}
                                 </div>
                                 <div style="font-size: 0.8em; color: #888;">${time}</div>

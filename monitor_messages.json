@@ -1,5 +1,23 @@
 [
   {
+    "timestamp": "2026-03-03T00:41:58.256050",
+    "source": "30min",
+    "type": "status",
+    "content": "当前信号: ⏸️ 观望（30分钟周期）\n原因: 无高概率信号"
+  },
+  {
+    "timestamp": "2026-03-03T00:40:41.203464",
+    "source": "5min",
+    "type": "status",
+    "content": "当前信号: ⏸️ 观望（5分钟周期）\n原因: 无高概率信号"
+  },
+  {
+    "timestamp": "2026-03-03T00:36:00.118651",
+    "source": "30min",
+    "type": "signal",
+    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $69,300.80\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: bullish (4H:bullish, 30M:bullish, 15M:bullish)\n  1分钟: bearish (RSI: 42.4)\n\n📋 做单理由:\n  1. 大周期看涨(4H:bullish, 30M:bullish, 15M:bullish)\n  2. 触及布林下轨($69196)\n  3. 接近近期低点($69155)\n\n📊 24h统计: 涨跌 +3.46%\n\n⏰ 00:36:00\n⚠️ 仅供参考，不构成投资建议"
+  },
+  {
     "timestamp": "2026-03-03T00:12:03.983717",
     "source": "lstm",
     "type": "signal",

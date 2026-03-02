@@ -4,11 +4,27 @@
     "initial_balance": 1000,
     "current_balance": 1085,
     "trade_history": [
-      {"type": "close", "direction": "short", "price": 66043, "entry_price": 66128, "exit_price": 66043, "amount": 100, "timestamp": "2026-03-02T19:41:10", "result": "profit", "profit": 85}
+      {
+        "type": "close",
+        "direction": "short",
+        "price": 66043,
+        "entry_price": 66128,
+        "exit_price": 66043,
+        "amount": 100,
+        "timestamp": "2026-03-02T19:41:10",
+        "result": "profit",
+        "profit": 85
+      }
     ],
     "active_position": null,
     "daily_stats": {
-      "2026-03-02": {"trades": 1, "wins": 1, "losses": 0, "profit": 85, "win_rate": 100}
+      "2026-03-02": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit": 85,
+        "win_rate": 100
+      }
     }
   },
   "30min": {
@@ -16,11 +32,27 @@
     "initial_balance": 1000,
     "current_balance": 900,
     "trade_history": [
-      {"type": "close", "direction": "long", "price": 66242.5, "entry_price": 66142.5, "exit_price": 66242.5, "amount": 100, "timestamp": "2026-03-02T19:41:10", "result": "loss", "profit": -100}
+      {
+        "type": "close",
+        "direction": "long",
+        "price": 66242.5,
+        "entry_price": 66142.5,
+        "exit_price": 66242.5,
+        "amount": 100,
+        "timestamp": "2026-03-02T19:41:10",
+        "result": "loss",
+        "profit": -100
+      }
     ],
     "active_position": null,
     "daily_stats": {
-      "2026-03-02": {"trades": 1, "wins": 0, "losses": 1, "profit": -100, "win_rate": 0}
+      "2026-03-02": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit": -100,
+        "win_rate": 0
+      }
     }
   },
   "signals_history": [],
@@ -39,28 +71,40 @@
   "ai_analysis": {
     "current_model": "kimi-coding-v2.5",
     "current_trend": {
-      "4H": "bearish",
-      "30M": "bearish",
-      "15M": "bearish",
-      "overall": "看跌"
+      "4H": "bullish",
+      "30M": "bullish",
+      "15M": "neutral",
+      "overall": "看涨"
     },
     "key_levels": {
-      "support": [65011, 65320, 65500],
-      "resistance": [66000, 66500, 67333]
+      "support": [
+        66000,
+        65500,
+        65000
+      ],
+      "resistance": [
+        66500,
+        67000,
+        67500
+      ]
     },
     "indicators": {
-      "RSI_4H": 58.9,
-      "RSI_30M": 39.4,
-      "RSI_15M": 23.5,
-      "MACD_4H": "neutral",
-      "MACD_30M": "bearish",
-      "BB_position": "接近下轨"
+      "RSI_4H": 62.5,
+      "RSI_30M": 58.3,
+      "RSI_15M": 45.2,
+      "MACD_4H": "bullish",
+      "MACD_30M": "bullish",
+      "BB_position": "中轨附近"
     },
     "model_prediction": {
-      "next_1h": {"up": 35, "down": 65},
-      "confidence": 0.62,
-      "suggested_action": "观望"
-    }
+      "next_1h": {
+        "up": 65,
+        "down": 35
+      },
+      "confidence": 0.68,
+      "suggested_action": "轻仓做多"
+    },
+    "last_updated": "2026-03-02T23:02:18.766762"
   },
   "performance": {
     "total_trades": 2,

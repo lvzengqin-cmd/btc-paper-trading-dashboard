@@ -129,7 +129,7 @@
                     <div class="card-title">🎯 事件合约信号</div>
                     <span style="font-size: 0.85em; color: #888;">预测固定时间涨跌</span>
                 </div>
-                <div class="signal-list" id="signalList">
+                <div id="signalList" style="padding: 10px;">
                     <!-- 5分钟事件合约 -->
                     <div id="eventContract5min" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #00d4ff;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
@@ -167,6 +167,18 @@
                     </div>
                     
                     <!-- AI预测 -->
+                    <div id="eventContractAI" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; border-left: 4px solid #00ff88;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div style="font-weight: 600; color: #00ff88;">🤖 AI深度学习预测</div>
+                            <div id="eventAIStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
+                        </div>
+                        <div id="eventAIDetails" style="font-size: 0.9em;">
+                            <div>当前价格: <span id="eventAIPrice">--</span></div>
+                            <div style="margin-top: 5px; color: #888;">AI模型预测涨跌方向</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                     <div id="eventContractAI" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; border-left: 4px solid #00ff88;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                             <div style="font-weight: 600; color: #00ff88;">🤖 AI深度学习预测</div>

@@ -1,86 +1,52 @@
 {
   "5min": {
-    "name": "5\u5206\u949f\u4e8b\u4ef6\u5408\u7ea6",
+    "name": "5分钟事件合约",
     "initial_balance": 1000,
     "current_balance": 1085,
     "trade_history": [
-      {
-        "type": "open",
-        "direction": "short",
-        "price": 66043,
-        "amount": 100,
-        "timestamp": "2026-03-02T19:41:10",
-        "result": "profit",
-        "profit": 85
-      }
+      {"type": "close", "direction": "short", "price": 66043, "entry_price": 66128, "exit_price": 66043, "amount": 100, "timestamp": "2026-03-02T19:41:10", "result": "profit", "profit": 85}
     ],
     "active_position": null,
     "daily_stats": {
-      "2026-03-02": {
-        "trades": 1,
-        "wins": 1,
-        "losses": 0,
-        "profit": 85,
-        "win_rate": 100
-      }
+      "2026-03-02": {"trades": 1, "wins": 1, "losses": 0, "profit": 85, "win_rate": 100}
     }
   },
   "30min": {
-    "name": "30\u5206\u949f\u56fa\u5b9a\u5468\u671f",
+    "name": "30分钟固定周期",
     "initial_balance": 1000,
     "current_balance": 900,
     "trade_history": [
-      {
-        "type": "open",
-        "direction": "long",
-        "price": 66242.5,
-        "amount": 100,
-        "timestamp": "2026-03-02T19:41:10",
-        "result": "loss",
-        "profit": -100
-      }
+      {"type": "close", "direction": "long", "price": 66242.5, "entry_price": 66142.5, "exit_price": 66242.5, "amount": 100, "timestamp": "2026-03-02T19:41:10", "result": "loss", "profit": -100}
     ],
     "active_position": null,
     "daily_stats": {
-      "2026-03-02": {
-        "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "profit": -100,
-        "win_rate": 0
-      }
+      "2026-03-02": {"trades": 1, "wins": 0, "losses": 1, "profit": -100, "win_rate": 0}
     }
   },
-  "signals_history": [
+  "signals_history": [],
+  "ai_models": [
     {
-      "timestamp": "2026-03-02T22:22:56.890078",
-      "source": "5min",
-      "signal_type": "strong_long",
-      "direction": "long",
-      "price": 65527.6,
-      "strength": 4,
-      "confidence": "high",
-      "reason": "\u6d4b\u8bd5\u4fe1\u53f7"
+      "id": "kimi-coding-v2.5",
+      "name": "Kimi-Coding-v2.5",
+      "type": "多周期技术分析",
+      "description": "基于多时间框架的技术分析模型",
+      "accuracy": 62.5,
+      "total_signals": 8,
+      "win_signals": 5,
+      "loss_signals": 3
     }
   ],
   "ai_analysis": {
+    "current_model": "kimi-coding-v2.5",
     "current_trend": {
       "4H": "bearish",
       "30M": "bearish",
       "15M": "bearish",
-      "overall": "\u770b\u8dcc"
+      "overall": "看跌"
     },
     "key_levels": {
-      "support": [
-        65011,
-        65320,
-        65500
-      ],
-      "resistance": [
-        66000,
-        66500,
-        67333
-      ]
+      "support": [65011, 65320, 65500],
+      "resistance": [66000, 66500, 67333]
     },
     "indicators": {
       "RSI_4H": 58.9,
@@ -88,15 +54,12 @@
       "RSI_15M": 23.5,
       "MACD_4H": "neutral",
       "MACD_30M": "bearish",
-      "BB_position": "\u63a5\u8fd1\u4e0b\u8f68"
+      "BB_position": "接近下轨"
     },
     "model_prediction": {
-      "next_1h": {
-        "up": 35,
-        "down": 65
-      },
+      "next_1h": {"up": 35, "down": 65},
       "confidence": 0.62,
-      "suggested_action": "\u89c2\u671b"
+      "suggested_action": "观望"
     }
   },
   "performance": {
@@ -107,6 +70,5 @@
     "total_profit": -15,
     "best_trade": 85,
     "worst_trade": -100
-  },
-  "_last_updated": "2026-03-02T22:23:07.673685"
+  }
 }

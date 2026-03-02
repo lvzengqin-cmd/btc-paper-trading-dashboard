@@ -1,5 +1,15 @@
 [
   {
+    "timestamp": "2026-03-02T23:36:20.040430",
+    "source": "multiframe",
+    "signal_type": "strong_short",
+    "direction": "short",
+    "price": 68973.0,
+    "strength": 3,
+    "confidence": "high",
+    "reason": "RSI超买(69.1)回落，大周期neutral"
+  },
+  {
     "timestamp": "2026-03-02T23:26:20.921027",
     "source": "lstm",
     "signal_type": "short",

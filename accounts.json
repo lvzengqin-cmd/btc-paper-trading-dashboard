@@ -30,7 +30,7 @@
   "30min": {
     "name": "30分钟固定周期",
     "initial_balance": 1000,
-    "current_balance": 900,
+    "current_balance": 1100,
     "trade_history": [
       {
         "type": "close",
@@ -40,18 +40,18 @@
         "exit_price": 66242.5,
         "amount": 100,
         "timestamp": "2026-03-02T19:41:10",
-        "result": "loss",
-        "profit": -100
+        "result": "profit",
+        "profit": 100
       }
     ],
     "active_position": null,
     "daily_stats": {
       "2026-03-02": {
         "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "profit": -100,
-        "win_rate": 0
+        "wins": 1,
+        "losses": 0,
+        "profit": 100,
+        "win_rate": 100
       }
     }
   },
@@ -108,11 +108,11 @@
   },
   "performance": {
     "total_trades": 2,
-    "total_wins": 1,
-    "total_losses": 1,
-    "overall_win_rate": 50,
-    "total_profit": -15,
-    "best_trade": 85,
-    "worst_trade": -100
+    "total_wins": 2,
+    "total_losses": 0,
+    "overall_win_rate": 100,
+    "total_profit": 185,
+    "best_trade": 100,
+    "worst_trade": 85
   }
 }

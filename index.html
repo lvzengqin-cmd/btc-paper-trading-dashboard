@@ -126,73 +126,7 @@
         </div>
         
         <div id="dashboard" class="tab-content active">
-            <div class="card signal-panel">
-                <div class="card-header">
-                    <div class="card-title">🎯 事件合约信号</div>
-                    <span style="font-size: 0.85em; color: #888;">预测固定时间涨跌</span>
-                </div>
-                <div id="signalList" style="padding: 10px;">
-                    <!-- 5分钟事件合约 -->
-                    <div id="eventContract5min" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #00d4ff;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <div style="font-weight: 600; color: #00d4ff;">⚡ 5分钟事件合约</div>
-                            <div id="event5minStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
-                        </div>
-                        <div id="event5minDetails" style="font-size: 0.9em;">
-                            <div>当前价格: <span id="event5minPrice">--</span></div>
-                            <div style="margin-top: 5px; color: #888;">预测5分钟后涨跌，收益率85%</div>
-                        </div>
-                    </div>
-                    
-                    <!-- 30分钟事件合约 -->
-                    <div id="eventContract30min" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #ffa502;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <div style="font-weight: 600; color: #ffa502;">📅 30分钟事件合约</div>
-                            <div id="event30minStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
-                        </div>
-                        <div id="event30minDetails" style="font-size: 0.9em;">
-                            <div>当前价格: <span id="event30minPrice">--</span></div>
-                            <div style="margin-top: 5px; color: #888;">预测30分钟后涨跌，收益率85%</div>
-                        </div>
-                    </div>
-                    
-                    <!-- 多时间框架分析 -->
-                    <div id="eventContractMultiframe" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #b8a0ff;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <div style="font-weight: 600; color: #b8a0ff;">📊 多时间框架分析</div>
-                            <div id="eventMultiframeStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
-                        </div>
-                        <div id="eventMultiframeDetails" style="font-size: 0.9em;">
-                            <div>当前价格: <span id="eventMultiframePrice">--</span></div>
-                            <div style="margin-top: 5px; color: #888;">4H/30M/15M多周期综合分析</div>
-                        </div>
-                    </div>
-                    
-                    <!-- AI预测 -->
-                    <div id="eventContractAI" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; border-left: 4px solid #00ff88;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <div style="font-weight: 600; color: #00ff88;">🤖 AI深度学习预测</div>
-                            <div id="eventAIStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
-                        </div>
-                        <div id="eventAIDetails" style="font-size: 0.9em;">
-                            <div>当前价格: <span id="eventAIPrice">--</span></div>
-                            <div style="margin-top: 5px; color: #888;">AI模型预测涨跌方向</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 监控动态消息 -->
-            <div class="card" style="margin-top: 20px;">
-                <div class="card-header">
-                    <div class="card-title">📢 监控动态消息</div>
-                    <span style="font-size: 0.85em; color: #888;">实时推送记录</span>
-                </div>
-                <div id="monitorMessages" style="max-height: 400px; overflow-y: auto;">
-                    <div style="text-align: center; color: #666; padding: 20px;">加载中...</div>
-                </div>
-            </div>
-            
+            <!-- 第一行：5分钟和30分钟事件合约账户 -->
             <div class="grid">
                 <div class="card">
                     <div class="card-header">
@@ -290,6 +224,74 @@
                         状态: <span class="position-badge badge-empty" id="status30min">--</span>
                         <span class="countdown" id="countdown30min"></span>
                     </div>
+                </div>
+            </div>
+            
+            <!-- 第二行：事件合约信号 -->
+            <div class="card signal-panel" style="margin-top: 20px;">
+                <div class="card-header">
+                    <div class="card-title">🎯 事件合约信号</div>
+                    <span style="font-size: 0.85em; color: #888;">预测固定时间涨跌</span>
+                </div>
+                <div id="signalList" style="padding: 10px;">
+                    <!-- 5分钟事件合约 -->
+                    <div id="eventContract5min" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #00d4ff;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div style="font-weight: 600; color: #00d4ff;">⚡ 5分钟事件合约</div>
+                            <div id="event5minStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
+                        </div>
+                        <div id="event5minDetails" style="font-size: 0.9em;">
+                            <div>当前价格: <span id="event5minPrice">--</span></div>
+                            <div style="margin-top: 5px; color: #888;">预测5分钟后涨跌，收益率85%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 30分钟事件合约 -->
+                    <div id="eventContract30min" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #ffa502;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div style="font-weight: 600; color: #ffa502;">📅 30分钟事件合约</div>
+                            <div id="event30minStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
+                        </div>
+                        <div id="event30minDetails" style="font-size: 0.9em;">
+                            <div>当前价格: <span id="event30minPrice">--</span></div>
+                            <div style="margin-top: 5px; color: #888;">预测30分钟后涨跌，收益率85%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 多时间框架分析 -->
+                    <div id="eventContractMultiframe" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #b8a0ff;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div style="font-weight: 600; color: #b8a0ff;">📊 多时间框架分析</div>
+                            <div id="eventMultiframeStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
+                        </div>
+                        <div id="eventMultiframeDetails" style="font-size: 0.9em;">
+                            <div>当前价格: <span id="eventMultiframePrice">--</span></div>
+                            <div style="margin-top: 5px; color: #888;">4H/30M/15M多周期综合分析</div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI预测 -->
+                    <div id="eventContractAI" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; border-left: 4px solid #00ff88;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div style="font-weight: 600; color: #00ff88;">🤖 AI深度学习预测</div>
+                            <div id="eventAIStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
+                        </div>
+                        <div id="eventAIDetails" style="font-size: 0.9em;">
+                            <div>当前价格: <span id="eventAIPrice">--</span></div>
+                            <div style="margin-top: 5px; color: #888;">AI模型预测涨跌方向</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第三行：监控动态消息 -->
+            <div class="card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <div class="card-title">📢 监控动态消息</div>
+                    <span style="font-size: 0.85em; color: #888;">实时推送记录</span>
+                </div>
+                <div id="monitorMessages" style="max-height: 400px; overflow-y: auto;">
+                    <div style="text-align: center; color: #666; padding: 20px;">加载中...</div>
                 </div>
             </div>
         </div>

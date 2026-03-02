@@ -1,0 +1,14 @@
+[
+  {
+    "timestamp": "2026-03-02T23:49:20.851088",
+    "source": "30min",
+    "type": "alert",
+    "content": "30分钟周期检测到潜在做多机会"
+  },
+  {
+    "timestamp": "2026-03-02T23:49:20.850929",
+    "source": "5min",
+    "type": "status",
+    "content": "5分钟周期监控正常运行，当前观望"
+  }
+]

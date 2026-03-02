@@ -1,5 +1,21 @@
 [
   {
+    "timestamp": "2026-03-02T23:39:22.756338",
+    "source": "30min",
+    "signal_type": "long",
+    "direction": "long",
+    "price": 98420.0,
+    "strength": 3,
+    "confidence": "medium",
+    "reason": "30分钟监控显示BTC $98,420，建议准备做多",
+    "details": {
+      "entry_range": "$98,450-$98,650",
+      "stop_loss": "97,650",
+      "take_profit": "99,850",
+      "full_analysis": "\n入场区间: $98,450-$98,650\n止损: $97,650\n止盈: $99,850\n分析: 4H中性偏多、30M震荡整理、15M轻度看空，1分钟/3分钟出现止跌信号\n"
+    }
+  },
+  {
     "timestamp": "2026-03-02T23:36:20.040430",
     "source": "multiframe",
     "signal_type": "strong_short",

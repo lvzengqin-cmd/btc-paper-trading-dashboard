@@ -66,6 +66,7 @@
         <div class="tabs">
             <div class="tab active" onclick="switchTab('dashboard')">📈 实时看板</div>
             <div class="tab" onclick="switchTab('signals')">🚨 信号记录</div>
+            <div class="tab" onclick="switchTab('ai')">🤖 AI分析</div>
             <div class="tab" onclick="switchTab('daily')">📅 每日统计</div>
             <div class="tab" onclick="switchTab('trades')">💰 交易记录</div>
         </div>
@@ -148,6 +149,89 @@
                 </div>
                 <div class="signal-list" id="allSignals">
                     <div style="text-align: center; color: #666; padding: 40px;">加载中...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="ai" class="tab-content">
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">📊 AI趋势分析</div>
+                    </div>
+                    <div id="aiTrend">
+                        <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; margin-bottom: 10px;">
+                            <div style="color: #888; margin-bottom: 5px;">多周期趋势</div>
+                            <div id="trend4H">4H: 加载中...</div>
+                            <div id="trend30M">30M: 加载中...</div>
+                            <div id="trend15M">15M: 加载中...</div>
+                            <div id="trendOverall" style="margin-top: 10px; font-weight: 600;">综合: 加载中...</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">📈 关键技术指标</div>
+                    </div>
+                    <div id="aiIndicators">
+                        <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>RSI (4H)</span>
+                                <span id="rsi4H">--</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>RSI (30M)</span>
+                                <span id="rsi30M">--</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>RSI (15M)</span>
+                                <span id="rsi15M">--</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>MACD (4H)</span>
+                                <span id="macd4H">--</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>布林带位置</span>
+                                <span id="bbPosition">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🎯 AI预测</div>
+                </div>
+                <div id="aiPrediction">
+                    <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <div>
+                                <div style="color: #888; margin-bottom: 5px;">未来1小时预测</div>
+                                <div style="display: flex; gap: 20px;">
+                                    <div>
+                                        <span style="color: #00ff88; font-size: 1.5em; font-weight: 700;">📈 </span>
+                                        <span id="predUp">--%</span>
+                                    </div>
+                                    <div>
+                                        <span style="color: #ff4757; font-size: 1.5em; font-weight: 700;">📉 </span>
+                                        <span id="predDown">--%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: #888; margin-bottom: 5px;">置信度</div>
+                                <div id="aiConfidence" style="font-size: 1.5em; font-weight: 700; color: #ffa502;">--</div>
+                            </div>
+                        </div>
+                        
+                        <div style="padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <div style="color: #888; margin-bottom: 5px;">AI建议</div>
+                            <div id="aiSuggestion" style="font-size: 1.2em; font-weight: 600;">加载中...</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -303,6 +387,41 @@
                     statusEl.textContent = '空仓';
                     statusEl.className = 'position-badge badge-empty';
                     countdownEl.textContent = '';
+                }
+            }
+            
+            // 更新AI分析
+            if (data.ai_analysis) {
+                const ai = data.ai_analysis;
+                
+                // 趋势分析
+                if (ai.current_trend) {
+                    const trend4H = ai.current_trend['4H'];
+                    const trend30M = ai.current_trend['30M'];
+                    const trend15M = ai.current_trend['15M'];
+                    const overall = ai.current_trend.overall;
+                    
+                    document.getElementById('trend4H').innerHTML = `4H: <span style="color: ${trend4H === 'bullish' ? '#00ff88' : trend4H === 'bearish' ? '#ff4757' : '#888'}">${trend4H === 'bullish' ? '看涨 📈' : trend4H === 'bearish' ? '看跌 📉' : '中性 ➖'}</span>`;
+                    document.getElementById('trend30M').innerHTML = `30M: <span style="color: ${trend30M === 'bullish' ? '#00ff88' : trend30M === 'bearish' ? '#ff4757' : '#888'}">${trend30M === 'bullish' ? '看涨 📈' : trend30M === 'bearish' ? '看跌 📉' : '中性 ➖'}</span>`;
+                    document.getElementById('trend15M').innerHTML = `15M: <span style="color: ${trend15M === 'bullish' ? '#00ff88' : trend15M === 'bearish' ? '#ff4757' : '#888'}">${trend15M === 'bullish' ? '看涨 📈' : trend15M === 'bearish' ? '看跌 📉' : '中性 ➖'}</span>`;
+                    document.getElementById('trendOverall').innerHTML = `综合趋势: <span style="color: ${overall === '看涨' ? '#00ff88' : overall === '看跌' ? '#ff4757' : '#888'}; font-size: 1.2em;">${overall}</span>`;
+                }
+                
+                // 技术指标
+                if (ai.indicators) {
+                    document.getElementById('rsi4H').textContent = ai.indicators.RSI_4H || '--';
+                    document.getElementById('rsi30M').textContent = ai.indicators.RSI_30M || '--';
+                    document.getElementById('rsi15M').textContent = ai.indicators.RSI_15M || '--';
+                    document.getElementById('macd4H').textContent = ai.indicators.MACD_4H || '--';
+                    document.getElementById('bbPosition').textContent = ai.indicators.BB_position || '--';
+                }
+                
+                // AI预测
+                if (ai.model_prediction) {
+                    document.getElementById('predUp').textContent = (ai.model_prediction.next_1h?.up || '--') + '%';
+                    document.getElementById('predDown').textContent = (ai.model_prediction.next_1h?.down || '--') + '%';
+                    document.getElementById('aiConfidence').textContent = ((ai.model_prediction.confidence || 0) * 100).toFixed(0) + '%';
+                    document.getElementById('aiSuggestion').textContent = ai.model_prediction.suggested_action || '观望';
                 }
             }
             

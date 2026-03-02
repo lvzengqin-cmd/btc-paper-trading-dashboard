@@ -1,5 +1,15 @@
 [
   {
+    "timestamp": "2026-03-02T23:19:31.642485",
+    "source": "30min",
+    "signal_type": "long",
+    "direction": "long",
+    "price": null,
+    "strength": 0,
+    "confidence": "low",
+    "reason": "0分钟监控轻仓做多信号，BTC $68,313，大周期共振看涨，1分钟RSI 82进入超买区，信号强度3/5，暂不触发模拟盘开仓。"
+  },
+  {
     "timestamp": "2026-03-02T22:59:20.071762",
     "source": "multiframe",
     "signal_type": "neutral",

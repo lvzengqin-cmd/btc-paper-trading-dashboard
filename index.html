@@ -552,7 +552,7 @@
             try {
                 const response = await fetch('accounts.json?t=' + Date.now());
                 const data = await response.json();
-                updateDashboard(data);
+                await updateDashboard(data);
                 document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('zh-CN');
             } catch (e) {
                 console.error('加载数据失败:', e);
@@ -560,7 +560,7 @@
         }
         
         // 更新面板
-        function updateDashboard(data) {
+        async function updateDashboard(data) {
             // 更新5分钟盘
             if (data['5min']) {
                 const acc = data['5min'];
@@ -1433,7 +1433,7 @@
                 const response = await fetch('accounts.json?t=' + Date.now());
                 const data = await response.json();
                 currentData = data;
-                updateDashboard(data);
+                await updateDashboard(data);
                 document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('zh-CN');
             } catch (e) {
                 console.error('加载数据失败:', e);

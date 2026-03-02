@@ -1296,43 +1296,59 @@
         // 获取BTC实时价格
         async function fetchBTCPrice() {
             try {
-                // 尝试多个API源
+                // 首先尝试从本地缓存获取（避免CORS问题）
+                try {
+                    const cacheResponse = await fetch('btc_price.json?t=' + Date.now());
+                    if (cacheResponse.ok) {
+                        const cacheData = await cacheResponse.json();
+                        updatePriceDisplay(cacheData);
+                        return;
+                    }
+                } catch (e) {
+                    console.log('本地缓存获取失败，尝试API');
+                }
+                
+                // 尝试直接API（电脑端通常可以）
                 let response;
                 try {
                     response = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
                 } catch (e) {
-                    // 备用API
                     response = await fetch('https://fapi.binance.com/fapi/v1/ticker/24hr?symbol=BTCUSDT');
                 }
                 
                 if (!response.ok) throw new Error('API请求失败');
                 
                 const data = await response.json();
-                
-                const price = parseFloat(data.lastPrice);
-                const changePercent = parseFloat(data.priceChangePercent);
-                const high = parseFloat(data.highPrice);
-                const low = parseFloat(data.lowPrice);
-                
-                const priceEl = document.getElementById('btcPrice');
-                const changeEl = document.getElementById('btcChange');
-                
-                if (priceEl) {
-                    priceEl.textContent = '$' + price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                }
-                
-                if (changeEl) {
-                    const changeText = (changePercent >= 0 ? '+' : '') + changePercent.toFixed(2) + '%';
-                    changeEl.textContent = changeText + ' | 高: $' + high.toFixed(0) + ' | 低: $' + low.toFixed(0);
-                    changeEl.style.color = changePercent >= 0 ? '#00ff88' : '#ff4757';
-                }
+                updatePriceDisplay({
+                    price: parseFloat(data.lastPrice),
+                    change_percent: parseFloat(data.priceChangePercent),
+                    high: parseFloat(data.highPrice),
+                    low: parseFloat(data.lowPrice)
+                });
                 
             } catch (e) {
                 console.error('获取BTC价格失败:', e);
                 const priceEl = document.getElementById('btcPrice');
-                if (priceEl && priceEl.textContent === '$--') {
-                    priceEl.textContent = '连接中...';
+                if (priceEl && (priceEl.textContent === '$--' || priceEl.textContent.includes('NaN'))) {
+                    priceEl.textContent = '加载中...';
                 }
+            }
+        }
+        
+        function updatePriceDisplay(data) {
+            const priceEl = document.getElementById('btcPrice');
+            const changeEl = document.getElementById('btcChange');
+            
+            if (priceEl && data.price) {
+                priceEl.textContent = '$' + data.price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+            
+            if (changeEl && data.change_percent !== undefined) {
+                const changeText = (data.change_percent >= 0 ? '+' : '') + data.change_percent.toFixed(2) + '%';
+                const high = data.high ? data.high.toFixed(0) : '--';
+                const low = data.low ? data.low.toFixed(0) : '--';
+                changeEl.textContent = changeText + ' | 高: $' + high + ' | 低: $' + low;
+                changeEl.style.color = data.change_percent >= 0 ? '#00ff88' : '#ff4757';
             }
         }
         

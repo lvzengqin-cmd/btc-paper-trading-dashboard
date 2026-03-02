@@ -1,5 +1,15 @@
 [
   {
+    "timestamp": "2026-03-02T23:26:20.921027",
+    "source": "lstm",
+    "signal_type": "short",
+    "direction": "short",
+    "price": 68524.32,
+    "strength": 3,
+    "confidence": "high",
+    "reason": "LSTM AI深度学习预测: 🔴 做空, 置信度74.8%"
+  },
+  {
     "timestamp": "2026-03-02T23:19:31.642485",
     "source": "30min",
     "signal_type": "long",

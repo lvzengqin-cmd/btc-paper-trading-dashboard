@@ -91,10 +91,53 @@
             <div class="card signal-panel">
                 <div class="card-header">
                     <div class="card-title">🚨 实时信号流</div>
-                    <span style="font-size: 0.85em; color: #888;">最新 50 条</span>
+                    <span style="font-size: 0.85em; color: #888;">4种信号源实时监控</span>
                 </div>
                 <div class="signal-list" id="signalList">
-                    <div style="text-align: center; color: #666; padding: 40px;">加载中...</div>
+                    <!-- 4种固定信号源 -->
+                    <div id="signalSource5min" class="signal-item" style="border-left-color: #00d4ff; background: linear-gradient(90deg, rgba(0,212,255,0.1), transparent);">
+                        <div class="signal-time" style="min-width: 100px;">
+                            <div style="font-weight: 600; color: #00d4ff;">⚡ 超短线</div>
+                            <div style="font-size: 0.7em; color: #888;">5分钟</div>
+                        </div>
+                        <div class="signal-content">
+                            <div class="signal-type" id="signal5minType">⏸️ 无信号</div>
+                            <div class="signal-price" id="signal5minDetail">等待交易机会...</div>
+                        </div>
+                    </div>
+                    
+                    <div id="signalSource30min" class="signal-item" style="border-left-color: #ffa502; background: linear-gradient(90deg, rgba(255,165,2,0.1), transparent);">
+                        <div class="signal-time" style="min-width: 100px;">
+                            <div style="font-weight: 600; color: #ffa502;">📅 短线</div>
+                            <div style="font-size: 0.7em; color: #888;">30分钟</div>
+                        </div>
+                        <div class="signal-content">
+                            <div class="signal-type" id="signal30minType">⏸️ 无信号</div>
+                            <div class="signal-price" id="signal30minDetail">等待交易机会...</div>
+                        </div>
+                    </div>
+                    
+                    <div id="signalSourceMultiframe" class="signal-item" style="border-left-color: #b8a0ff; background: linear-gradient(90deg, rgba(123,44,191,0.1), transparent);">
+                        <div class="signal-time" style="min-width: 100px;">
+                            <div style="font-weight: 600; color: #b8a0ff;">📊 多周期</div>
+                            <div style="font-size: 0.7em; color: #888;">综合分析</div>
+                        </div>
+                        <div class="signal-content">
+                            <div class="signal-type" id="signalMultiframeType">⏸️ 无信号</div>
+                            <div class="signal-price" id="signalMultiframeDetail">等待交易机会...</div>
+                        </div>
+                    </div>
+                    
+                    <div id="signalSourceLSTM" class="signal-item" style="border-left-color: #00ff88; background: linear-gradient(90deg, rgba(0,255,136,0.1), transparent);">
+                        <div class="signal-time" style="min-width: 100px;">
+                            <div style="font-weight: 600; color: #00ff88;">🤖 AI预测</div>
+                            <div style="font-size: 0.7em; color: #888;">LSTM深度学习</div>
+                        </div>
+                        <div class="signal-content">
+                            <div class="signal-type" id="signalLSTMType">⏸️ 无信号</div>
+                            <div class="signal-price" id="signalLSTMDetail">等待交易机会...</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -616,6 +659,23 @@
                 }
             }
             
+            // 更新4个固定信号源的实时显示
+            updateRealTimeSignals(data);
+            
+            // 更新信号列表（所有信号历史）
+            updateSignals(data);
+            
+            // 检查强烈信号并推送通知
+            checkStrongSignals(data);
+            
+            // 更新每日统计
+            updateDailyStats(data);
+            
+            // 更新交易记录
+            updateTrades(data);Id('aiSuggestion').textContent = ai.model_prediction.suggested_action || '观望';
+                }
+            }
+            
             // 更新信号列表
             updateSignals(data);
             
@@ -629,9 +689,78 @@
             updateTrades(data);
         }
         
-        // 更新信号列表（显示所有信号）
+        // 更新4个固定信号源的实时显示
+        function updateRealTimeSignals(data) {
+            const signals = data.signals_history || [];
+            const now = new Date();
+            const fiveMinutesAgo = new Date(now - 5 * 60 * 1000);
+            
+            // 定义4个信号源
+            const sources = [
+                { id: '5min', name: '超短线', elementId: 'signal5min' },
+                { id: '30min', name: '短线', elementId: 'signal30min' },
+                { id: 'multiframe', name: '多周期', elementId: 'signalMultiframe' },
+                { id: 'lstm', name: 'AI预测', elementId: 'signalLSTM' }
+            ];
+            
+            sources.forEach(source => {
+                // 获取该信号源最近5分钟内的最新信号
+                const sourceSignals = signals.filter(s => 
+                    s.source === source.id && 
+                    new Date(s.timestamp) > fiveMinutesAgo
+                );
+                
+                const latestSignal = sourceSignals.length > 0 ? sourceSignals[0] : null;
+                
+                const typeEl = document.getElementById(source.elementId + 'Type');
+                const detailEl = document.getElementById(source.elementId + 'Detail');
+                
+                if (latestSignal) {
+                    // 有信号，显示详细信息
+                    let signalText = '';
+                    let signalColor = '';
+                    
+                    switch(latestSignal.signal_type) {
+                        case 'strong_long':
+                            signalText = '🔥 强烈做多';
+                            signalColor = '#00ff88';
+                            break;
+                        case 'strong_short':
+                            signalText = '🔥 强烈做空';
+                            signalColor = '#ff4757';
+                            break;
+                        case 'long':
+                            signalText = '🟢 做多';
+                            signalColor = '#00ff88';
+                            break;
+                        case 'short':
+                            signalText = '🔴 做空';
+                            signalColor = '#ff4757';
+                            break;
+                        case 'neutral':
+                            signalText = '⏸️ 观望';
+                            signalColor = '#888';
+                            break;
+                        default:
+                            signalText = '⏸️ 无信号';
+                            signalColor = '#888';
+                    }
+                    
+                    typeEl.innerHTML = `<span style="color: ${signalColor}; font-weight: 600;">${signalText}</span>`;
+                    
+                    const timeStr = new Date(latestSignal.timestamp).toLocaleTimeString('zh-CN', {hour: '2-digit', minute:'2-digit'});
+                    const strengthStr = latestSignal.strength ? `强度 ${latestSignal.strength}/5` : '';
+                    detailEl.innerHTML = `${timeStr} | $${latestSignal.price?.toFixed(2) || '--'} ${strengthStr}`;
+                } else {
+                    // 无信号
+                    typeEl.innerHTML = '<span style="color: #666;">⏸️ 无信号</span>';
+                    detailEl.innerHTML = '等待交易机会...';
+                }
+            });
+        }
+        
+        // 更新信号列表（所有信号历史）
         function updateSignals(data) {
-            const signalList = document.getElementById('signalList');
             const allSignals = document.getElementById('allSignals');
             
             // 从 signals_history 获取所有信号
@@ -705,10 +834,8 @@
             };
             
             if (signals.length > 0) {
-                signalList.innerHTML = signals.slice(0, 10).map(renderSignal).join('');
                 allSignals.innerHTML = signals.map(renderSignal).join('');
             } else {
-                signalList.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">等待信号...</div>';
                 allSignals.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">暂无信号记录</div>';
             }
         }

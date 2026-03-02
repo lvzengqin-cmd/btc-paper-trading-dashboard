@@ -69,6 +69,7 @@
             <div class="tab" onclick="switchTab('ai')">🤖 AI分析</div>
             <div class="tab" onclick="switchTab('daily')">📅 每日统计</div>
             <div class="tab" onclick="switchTab('trades')">💰 交易记录</div>
+            <div class="tab" onclick="switchTab('export')">📥 数据导出</div>
         </div>
         
         <div id="dashboard" class="tab-content active">
@@ -292,6 +293,46 @@
                 </div>
                 <div class="trade-list" id="tradeList">
                     <div style="text-align: center; color: #666; padding: 40px;">加载中...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="export" class="tab-content">
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">📥 导出交易记录</div>
+                    </div>
+                    <div style="padding: 20px;">
+                        <p style="color: #888; margin-bottom: 20px;">导出所有交易记录为CSV格式，可用于Excel分析或AI训练。</p>
+                        <button onclick="exportTrades()" style="background: linear-gradient(135deg, #00d4ff, #7b2cbf); border: none; color: #fff; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-size: 1em;">
+                            📥 导出交易记录 (CSV)
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">📥 导出信号历史</div>
+                    </div>
+                    <div style="padding: 20px;">
+                        <p style="color: #888; margin-bottom: 20px;">导出所有信号记录为JSON格式，用于AI模型训练。</p>
+                        <button onclick="exportSignals()" style="background: linear-gradient(135deg, #00d4ff, #7b2cbf); border: none; color: #fff; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-size: 1em;">
+                            📥 导出信号历史 (JSON)
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">📥 导出完整数据</div>
+                    </div>
+                    <div style="padding: 20px;">
+                        <p style="color: #888; margin-bottom: 20px;">导出所有数据（交易+信号+统计），用于备份或迁移。</p>
+                        <button onclick="exportAll()" style="background: linear-gradient(135deg, #00ff88, #00d4ff); border: none; color: #fff; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-size: 1em;">
+                            📥 导出完整数据 (JSON)
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -651,6 +692,99 @@
             } else {
                 tradeList.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">暂无交易记录</div>';
             }
+        }
+        
+        // 导出功能
+        let currentData = null;
+        
+        async function loadData() {
+            try {
+                const response = await fetch('accounts.json?t=' + Date.now());
+                const data = await response.json();
+                currentData = data; // 保存数据用于导出
+                updateDashboard(data);
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('zh-CN');
+            } catch (e) {
+                console.error('加载数据失败:', e);
+            }
+        }
+        
+        // 导出交易记录为CSV
+        function exportTrades() {
+            if (!currentData) {
+                alert('数据加载中，请稍后再试');
+                return;
+            }
+            
+            let allTrades = [];
+            ['5min', '30min'].forEach(type => {
+                if (currentData[type] && currentData[type].trade_history) {
+                    currentData[type].trade_history.forEach(trade => {
+                        if (trade.type === 'close') {
+                            allTrades.push({
+                                ...trade,
+                                accountType: type
+                            });
+                        }
+                    });
+                }
+            });
+            
+            if (allTrades.length === 0) {
+                alert('暂无交易记录');
+                return;
+            }
+            
+            // CSV头部
+            const csv = [
+                ['时间', '模拟盘', '方向', '入场价', '出场价', '结果', '盈亏(USDT)'].join(','),
+                ...allTrades.map(t => [
+                    t.timestamp,
+                    t.accountType,
+                    t.direction === 'long' ? '做多' : '做空',
+                    t.entry_price || '',
+                    t.exit_price || '',
+                    t.result === 'profit' ? '盈利' : '亏损',
+                    t.profit || 0
+                ].join(','))
+            ].join('\n');
+            
+            downloadFile(csv, 'trades.csv', 'text/csv');
+        }
+        
+        // 导出信号历史为JSON
+        function exportSignals() {
+            if (!currentData || !currentData.signals_history) {
+                alert('暂无信号记录');
+                return;
+            }
+            
+            const json = JSON.stringify(currentData.signals_history, null, 2);
+            downloadFile(json, 'signals.json', 'application/json');
+        }
+        
+        // 导出完整数据
+        function exportAll() {
+            if (!currentData) {
+                alert('数据加载中，请稍后再试');
+                return;
+            }
+            
+            const json = JSON.stringify(currentData, null, 2);
+            downloadFile(json, 'btc_trading_data.json', 'application/json');
+        }
+        
+        // 下载文件辅助函数
+        function downloadFile(content, filename, type) {
+            const blob = new Blob([content], { type });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
         
         // 初始化加载

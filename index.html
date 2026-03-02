@@ -48,6 +48,39 @@
         .daily-title { font-size: 0.9em; color: #888; margin-bottom: 10px; }
         .daily-value { font-size: 1.5em; font-weight: 700; }
         .trade-list { max-height: 300px; overflow-y: auto; }
+        
+        /* 手机端优化 */
+        @media (max-width: 768px) {
+            .header { padding: 12px; }
+            .header h1 { font-size: 1.2em; }
+            .header-content { flex-direction: column; gap: 10px; align-items: flex-start; }
+            #btcPrice { font-size: 1.4em !important; }
+            .container { padding: 10px; }
+            .grid { grid-template-columns: 1fr; gap: 12px; }
+            .card { padding: 15px; }
+            .card-title { font-size: 1em; }
+            .tabs { flex-wrap: wrap; gap: 3px; }
+            .tab { padding: 8px 12px; font-size: 0.85em; }
+            .account-balance { font-size: 1.5em; }
+            .account-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .stat-value { font-size: 1.1em; }
+            .daily-stats { grid-template-columns: 1fr; }
+            .signal-item { flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px; }
+            .signal-time { min-width: auto; width: 100%; display: flex; justify-content: space-between; }
+            .signal-content { margin: 0; width: 100%; }
+            .trade-item { padding: 12px; }
+            #positionDetails5min, #positionDetails30min { padding: 12px; }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1em; }
+            .tab { padding: 6px 10px; font-size: 0.8em; }
+            .card { padding: 12px; border-radius: 12px; }
+            .account-stats { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+            .stat-box { padding: 8px 5px; }
+            .stat-value { font-size: 1em; }
+            .stat-label { font-size: 0.7em; }
+        }
         .trade-item { display: flex; justify-content: space-between; padding: 10px; margin-bottom: 5px; background: rgba(0,0,0,0.15); border-radius: 8px; }
         .trade-win { border-left: 3px solid #00ff88; }
         .trade-loss { border-left: 3px solid #ff4757; }

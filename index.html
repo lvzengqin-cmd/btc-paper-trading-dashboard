@@ -204,8 +204,23 @@
             
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">🎯 AI预测</div>
+                    <div class="card-title">🤖 AI模型信息</div>
                 </div>
+                <div id="aiModelInfo" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="color: #888;">当前模型</span>
+                        <span id="currentModel" style="font-weight: 600; color: #00d4ff;">Kimi-Coding-v2.5</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="color: #888;">模型类型</span>
+                        <span>多周期技术分析</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #888;">预测准确率</span>
+                        <span id="modelAccuracy" style="color: #ffa502;">--%</span>
+                    </div>
+                </div>
+            </div>
                 <div id="aiPrediction">
                     <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -434,6 +449,13 @@
             // 更新AI分析
             if (data.ai_analysis) {
                 const ai = data.ai_analysis;
+                
+                // 更新模型信息
+                if (data.ai_models && data.ai_models.length > 0) {
+                    const currentModel = data.ai_models.find(m => m.id === ai.current_model) || data.ai_models[0];
+                    document.getElementById('currentModel').textContent = currentModel.name;
+                    document.getElementById('modelAccuracy').textContent = (currentModel.accuracy || 0).toFixed(1) + '%';
+                }
                 
                 // 趋势分析
                 if (ai.current_trend) {

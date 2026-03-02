@@ -1,57 +1,112 @@
 {
   "5min": {
-    "name": "5\u5206\u949f\u4e8b\u4ef6\u5408\u7ea6\u6a21\u62df\u76d8",
+    "name": "5\u5206\u949f\u4e8b\u4ef6\u5408\u7ea6",
     "initial_balance": 1000,
     "current_balance": 1085,
-    "trade_amount": 100,
-    "profit_amount": 85,
-    "loss_amount": 100,
     "trade_history": [
       {
         "type": "open",
-        "position_id": "5min_20260302_194110",
         "direction": "short",
-        "price": 66043.0,
+        "price": 66043,
         "amount": 100,
-        "timestamp": "2026-03-02T19:41:10.432970"
-      },
-      {
-        "type": "close",
-        "position_id": "5min_20260302_194110",
-        "exit_price": 67363.86,
+        "timestamp": "2026-03-02T19:41:10",
         "result": "profit",
-        "profit": 85,
-        "timestamp": "2026-03-02T19:47:08.230673"
+        "profit": 85
       }
     ],
-    "created_at": "2026-03-02T19:35:00+08:00"
+    "active_position": null,
+    "daily_stats": {
+      "2026-03-02": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit": 85,
+        "win_rate": 100
+      }
+    }
   },
   "30min": {
-    "name": "30\u5206\u949f\u56fa\u5b9a\u5468\u671f\u6a21\u62df\u76d8",
+    "name": "30\u5206\u949f\u56fa\u5b9a\u5468\u671f",
     "initial_balance": 1000,
     "current_balance": 900,
-    "trade_amount": 100,
-    "profit_amount": 85,
-    "loss_amount": 100,
     "trade_history": [
       {
         "type": "open",
-        "position_id": "30min_20260302_194110",
         "direction": "long",
         "price": 66242.5,
         "amount": 100,
-        "timestamp": "2026-03-02T19:41:10.433551"
-      },
-      {
-        "type": "close",
-        "position_id": "30min_20260302_194110",
-        "exit_price": 64917.65,
+        "timestamp": "2026-03-02T19:41:10",
         "result": "loss",
-        "profit": -100,
-        "timestamp": "2026-03-02T20:20:22.250378"
+        "profit": -100
       }
     ],
-    "created_at": "2026-03-02T19:35:00+08:00"
+    "active_position": null,
+    "daily_stats": {
+      "2026-03-02": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit": -100,
+        "win_rate": 0
+      }
+    }
   },
-  "_last_updated": "2026-03-02T21:57:03.911284"
+  "signals_history": [
+    {
+      "timestamp": "2026-03-02T22:22:56.890078",
+      "source": "5min",
+      "signal_type": "strong_long",
+      "direction": "long",
+      "price": 65527.6,
+      "strength": 4,
+      "confidence": "high",
+      "reason": "\u6d4b\u8bd5\u4fe1\u53f7"
+    }
+  ],
+  "ai_analysis": {
+    "current_trend": {
+      "4H": "bearish",
+      "30M": "bearish",
+      "15M": "bearish",
+      "overall": "\u770b\u8dcc"
+    },
+    "key_levels": {
+      "support": [
+        65011,
+        65320,
+        65500
+      ],
+      "resistance": [
+        66000,
+        66500,
+        67333
+      ]
+    },
+    "indicators": {
+      "RSI_4H": 58.9,
+      "RSI_30M": 39.4,
+      "RSI_15M": 23.5,
+      "MACD_4H": "neutral",
+      "MACD_30M": "bearish",
+      "BB_position": "\u63a5\u8fd1\u4e0b\u8f68"
+    },
+    "model_prediction": {
+      "next_1h": {
+        "up": 35,
+        "down": 65
+      },
+      "confidence": 0.62,
+      "suggested_action": "\u89c2\u671b"
+    }
+  },
+  "performance": {
+    "total_trades": 2,
+    "total_wins": 1,
+    "total_losses": 1,
+    "overall_win_rate": 50,
+    "total_profit": -15,
+    "best_trade": 85,
+    "worst_trade": -100
+  },
+  "_last_updated": "2026-03-02T22:23:07.673685"
 }

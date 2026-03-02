@@ -1,5 +1,35 @@
 [
   {
+    "timestamp": "2026-03-02T22:31:13.287362",
+    "source": "multiframe",
+    "signal_type": "long",
+    "direction": "long",
+    "price": 65379.1,
+    "strength": 2,
+    "confidence": "medium",
+    "reason": "测试信号3"
+  },
+  {
+    "timestamp": "2026-03-02T21:31:13.287358",
+    "source": "30min",
+    "signal_type": "strong_short",
+    "direction": "short",
+    "price": 65600.0,
+    "strength": 5,
+    "confidence": "high",
+    "reason": "测试信号2"
+  },
+  {
+    "timestamp": "2026-03-02T20:31:13.287342",
+    "source": "5min",
+    "signal_type": "strong_long",
+    "direction": "long",
+    "price": 65400.0,
+    "strength": 4,
+    "confidence": "high",
+    "reason": "测试信号1"
+  },
+  {
     "timestamp": "2026-03-02T22:22:56.890078",
     "source": "5min",
     "signal_type": "strong_long",
@@ -7,6 +37,6 @@
     "price": 65527.6,
     "strength": 4,
     "confidence": "high",
-    "reason": "\u6d4b\u8bd5\u4fe1\u53f7"
+    "reason": "测试信号"
   }
 ]

@@ -716,8 +716,8 @@
             // 更新4个固定信号源的实时显示
             updateRealTimeSignals(data);
             
-            // 更新事件合约显示
-            updateEventContracts(data);
+            // 更新事件合约显示（异步）
+            await updateEventContracts(data);
             
             // 更新监控消息
             updateMonitorMessages();
@@ -808,15 +808,32 @@
         }
         
         // 更新事件合约显示
-        function updateEventContracts(data) {
+        async function updateEventContracts(data) {
             const signals = data.signals_history || [];
             const now = new Date();
             const fiveMinutesAgo = new Date(now - 5 * 60 * 1000);
             const thirtyMinutesAgo = new Date(now - 30 * 60 * 1000);
             
-            // 获取BTC当前价格
-            const btcPriceEl = document.getElementById('btcPrice');
-            const currentPrice = btcPriceEl ? parseFloat(btcPriceEl.textContent.replace(/[^0-9.]/g, '')) : 0;
+            // 获取BTC当前价格 - 优先从缓存文件读取
+            let currentPrice = 0;
+            try {
+                const priceResponse = await fetch('btc_price.json?t=' + Date.now());
+                if (priceResponse.ok) {
+                    const priceData = await priceResponse.json();
+                    currentPrice = priceData.price || 0;
+                }
+            } catch (e) {
+                console.log('从缓存读取价格失败');
+            }
+            
+            // 如果缓存失败，尝试从页面元素读取
+            if (!currentPrice || isNaN(currentPrice)) {
+                const btcPriceEl = document.getElementById('btcPrice');
+                if (btcPriceEl) {
+                    const priceText = btcPriceEl.textContent.replace(/[^0-9.]/g, '');
+                    currentPrice = parseFloat(priceText) || 0;
+                }
+            }
             
             // 4个事件合约信号源
             const eventSources = [

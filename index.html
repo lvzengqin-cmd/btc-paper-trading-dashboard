@@ -123,52 +123,43 @@
         <div id="dashboard" class="tab-content active">
             <div class="card signal-panel">
                 <div class="card-header">
-                    <div class="card-title">🚨 实时信号流</div>
-                    <span style="font-size: 0.85em; color: #888;">4种信号源实时监控</span>
+                    <div class="card-title">🎯 事件合约信号</div>
+                    <span style="font-size: 0.85em; color: #888;">预测固定时间涨跌</span>
                 </div>
                 <div class="signal-list" id="signalList">
-                    <!-- 4种固定信号源 -->
-                    <div id="signalSource5min" class="signal-item" style="border-left-color: #00d4ff; background: linear-gradient(90deg, rgba(0,212,255,0.1), transparent);">
-                        <div class="signal-time" style="min-width: 100px;">
-                            <div style="font-weight: 600; color: #00d4ff;">⚡ 超短线</div>
-                            <div style="font-size: 0.7em; color: #888;">5分钟</div>
+                    <!-- 5分钟事件合约 -->
+                    <div id="eventContract5min" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #00d4ff;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div style="font-weight: 600; color: #00d4ff;">⚡ 5分钟事件合约</div>
+                            <div id="event5minStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
                         </div>
-                        <div class="signal-content">
-                            <div class="signal-type" id="signal5minType">⏸️ 无信号</div>
-                            <div class="signal-price" id="signal5minDetail">等待交易机会...</div>
-                        </div>
-                    </div>
-                    
-                    <div id="signalSource30min" class="signal-item" style="border-left-color: #ffa502; background: linear-gradient(90deg, rgba(255,165,2,0.1), transparent);">
-                        <div class="signal-time" style="min-width: 100px;">
-                            <div style="font-weight: 600; color: #ffa502;">📅 短线</div>
-                            <div style="font-size: 0.7em; color: #888;">30分钟</div>
-                        </div>
-                        <div class="signal-content">
-                            <div class="signal-type" id="signal30minType">⏸️ 无信号</div>
-                            <div class="signal-price" id="signal30minDetail">等待交易机会...</div>
+                        <div id="event5minDetails" style="font-size: 0.9em;">
+                            <div>当前价格: <span id="event5minPrice">--</span></div>
+                            <div style="margin-top: 5px; color: #888;">预测5分钟后涨跌，收益率85%</div>
                         </div>
                     </div>
                     
-                    <div id="signalSourceMultiframe" class="signal-item" style="border-left-color: #b8a0ff; background: linear-gradient(90deg, rgba(123,44,191,0.1), transparent);">
-                        <div class="signal-time" style="min-width: 100px;">
-                            <div style="font-weight: 600; color: #b8a0ff;">📊 多周期</div>
-                            <div style="font-size: 0.7em; color: #888;">综合分析</div>
+                    <!-- 30分钟事件合约 -->
+                    <div id="eventContract30min" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #ffa502;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div style="font-weight: 600; color: #ffa502;">📅 30分钟事件合约</div>
+                            <div id="event30minStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
                         </div>
-                        <div class="signal-content">
-                            <div class="signal-type" id="signalMultiframeType">⏸️ 无信号</div>
-                            <div class="signal-price" id="signalMultiframeDetail">等待交易机会...</div>
+                        <div id="event30minDetails" style="font-size: 0.9em;">
+                            <div>当前价格: <span id="event30minPrice">--</span></div>
+                            <div style="margin-top: 5px; color: #888;">预测30分钟后涨跌，收益率85%</div>
                         </div>
                     </div>
                     
-                    <div id="signalSourceLSTM" class="signal-item" style="border-left-color: #00ff88; background: linear-gradient(90deg, rgba(0,255,136,0.1), transparent);">
-                        <div class="signal-time" style="min-width: 100px;">
-                            <div style="font-weight: 600; color: #00ff88;">🤖 AI预测</div>
-                            <div style="font-size: 0.7em; color: #888;">LSTM深度学习</div>
+                    <!-- AI预测 -->
+                    <div id="eventContractAI" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; border-left: 4px solid #00ff88;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div style="font-weight: 600; color: #00ff88;">🤖 AI深度学习预测</div>
+                            <div id="eventAIStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
                         </div>
-                        <div class="signal-content">
-                            <div class="signal-type" id="signalLSTMType">⏸️ 无信号</div>
-                            <div class="signal-price" id="signalLSTMDetail">等待交易机会...</div>
+                        <div id="eventAIDetails" style="font-size: 0.9em;">
+                            <div>当前价格: <span id="eventAIPrice">--</span></div>
+                            <div style="margin-top: 5px; color: #888;">AI模型预测涨跌方向</div>
                         </div>
                     </div>
                 </div>

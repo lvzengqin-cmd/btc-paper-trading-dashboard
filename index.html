@@ -119,6 +119,29 @@
                             <div class="stat-label">亏损</div>
                         </div>
                     </div>
+                    <!-- 持仓详情 -->
+                    <div id="positionDetails5min" style="margin-top: 15px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; display: none;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #888;">开仓时间</span>
+                            <span id="openTime5min">--</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #888;">开仓价格</span>
+                            <span id="openPrice5min">--</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #888;">开仓金额</span>
+                            <span id="openAmount5min">--</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #888;">当前盈亏</span>
+                            <span id="currentPnl5min">--</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #888;">平仓时间</span>
+                            <span id="closeTime5min" style="font-weight: 600; color: #ffa502;">--</span>
+                        </div>
+                    </div>
                     <div style="margin-top: 15px;">
                         状态: <span class="position-badge badge-empty" id="status5min">--</span>
                         <span class="countdown" id="countdown5min"></span>
@@ -143,6 +166,29 @@
                         <div class="stat-box">
                             <div class="stat-value loss" id="losses30min">--</div>
                             <div class="stat-label">亏损</div>
+                        </div>
+                    </div>
+                    <!-- 持仓详情 -->
+                    <div id="positionDetails30min" style="margin-top: 15px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; display: none;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #888;">开仓时间</span>
+                            <span id="openTime30min">--</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #888;">开仓价格</span>
+                            <span id="openPrice30min">--</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #888;">开仓金额</span>
+                            <span id="openAmount30min">--</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #888;">当前盈亏</span>
+                            <span id="currentPnl30min">--</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #888;">平仓时间</span>
+                            <span id="closeTime30min" style="font-weight: 600; color: #ffa502;">--</span>
                         </div>
                     </div>
                     <div style="margin-top: 15px;">
@@ -329,12 +375,23 @@
         </div>
         
         <div id="trades" class="tab-content">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">💰 详细交易记录</div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">⚡ 5分钟事件合约 - 交易记录</div>
+                    </div>
+                    <div class="trade-list" id="tradeList5min" style="max-height: 400px; overflow-y: auto;">
+                        <div style="text-align: center; color: #666; padding: 40px;">加载中...</div>
+                    </div>
                 </div>
-                <div class="trade-list" id="tradeList">
-                    <div style="text-align: center; color: #666; padding: 40px;">加载中...</div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">📅 30分钟固定周期 - 交易记录</div>
+                    </div>
+                    <div class="trade-list" id="tradeList30min" style="max-height: 400px; overflow-y: auto;">
+                        <div style="text-align: center; color: #666; padding: 40px;">加载中...</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -421,20 +478,40 @@
                 
                 const statusEl = document.getElementById('status5min');
                 const countdownEl = document.getElementById('countdown5min');
+                const positionDetailsEl = document.getElementById('positionDetails5min');
+                
                 if (acc.active_position) {
                     const isLong = acc.active_position.direction === 'long';
                     statusEl.textContent = isLong ? '做多中' : '做空中';
                     statusEl.className = 'position-badge ' + (isLong ? 'badge-long' : 'badge-short');
-                    // 计算剩余时间
+                    
+                    // 显示持仓详情
+                    positionDetailsEl.style.display = 'block';
                     const opened = new Date(acc.active_position.opened_at);
                     const now = new Date();
-                    const elapsed = (now - opened) / 1000 / 60;
+                    const elapsed = (now - opened) / 1000 / 60; // 分钟
                     const remaining = Math.max(0, 5 - elapsed);
-                    countdownEl.textContent = ` (剩余 ${remaining.toFixed(1)} 分钟)`;
+                    const closeTime = new Date(opened.getTime() + 5 * 60 * 1000);
+                    
+                    document.getElementById('openTime5min').textContent = opened.toLocaleString('zh-CN');
+                    document.getElementById('openPrice5min').textContent = '$' + (acc.active_position.price || 0).toFixed(2);
+                    document.getElementById('openAmount5min').textContent = (acc.active_position.amount || 0) + ' USDT';
+                    
+                    // 计算当前盈亏
+                    const currentPrice = parseFloat(document.getElementById('btcPrice').textContent.replace(/[^0-9.]/g, '')) || acc.active_position.price;
+                    const priceDiff = isLong ? (currentPrice - acc.active_position.price) : (acc.active_position.price - currentPrice);
+                    const currentPnl = priceDiff * (acc.active_position.amount / acc.active_position.price);
+                    const pnlEl = document.getElementById('currentPnl5min');
+                    pnlEl.textContent = (currentPnl >= 0 ? '+' : '') + currentPnl.toFixed(2) + ' USDT';
+                    pnlEl.style.color = currentPnl >= 0 ? '#00ff88' : '#ff4757';
+                    
+                    document.getElementById('closeTime5min').textContent = closeTime.toLocaleString('zh-CN') + ` (${remaining.toFixed(1)}分钟后)`;
+                    countdownEl.textContent = ` ⏱️ ${remaining.toFixed(1)}分钟`;
                 } else {
                     statusEl.textContent = '空仓';
                     statusEl.className = 'position-badge badge-empty';
                     countdownEl.textContent = '';
+                    positionDetailsEl.style.display = 'none';
                 }
             }
             
@@ -456,20 +533,40 @@
                 
                 const statusEl = document.getElementById('status30min');
                 const countdownEl = document.getElementById('countdown30min');
+                const positionDetailsEl = document.getElementById('positionDetails30min');
+                
                 if (acc.active_position) {
                     const isLong = acc.active_position.direction === 'long';
                     statusEl.textContent = isLong ? '做多中' : '做空中';
                     statusEl.className = 'position-badge ' + (isLong ? 'badge-long' : 'badge-short');
-                    // 计算剩余时间
+                    
+                    // 显示持仓详情
+                    positionDetailsEl.style.display = 'block';
                     const opened = new Date(acc.active_position.opened_at);
                     const now = new Date();
-                    const elapsed = (now - opened) / 1000 / 60;
+                    const elapsed = (now - opened) / 1000 / 60; // 分钟
                     const remaining = Math.max(0, 30 - elapsed);
-                    countdownEl.textContent = ` (剩余 ${remaining.toFixed(1)} 分钟)`;
+                    const closeTime = new Date(opened.getTime() + 30 * 60 * 1000);
+                    
+                    document.getElementById('openTime30min').textContent = opened.toLocaleString('zh-CN');
+                    document.getElementById('openPrice30min').textContent = '$' + (acc.active_position.price || 0).toFixed(2);
+                    document.getElementById('openAmount30min').textContent = (acc.active_position.amount || 0) + ' USDT';
+                    
+                    // 计算当前盈亏
+                    const currentPrice = parseFloat(document.getElementById('btcPrice').textContent.replace(/[^0-9.]/g, '')) || acc.active_position.price;
+                    const priceDiff = isLong ? (currentPrice - acc.active_position.price) : (acc.active_position.price - currentPrice);
+                    const currentPnl = priceDiff * (acc.active_position.amount / acc.active_position.price);
+                    const pnlEl = document.getElementById('currentPnl30min');
+                    pnlEl.textContent = (currentPnl >= 0 ? '+' : '') + currentPnl.toFixed(2) + ' USDT';
+                    pnlEl.style.color = currentPnl >= 0 ? '#00ff88' : '#ff4757';
+                    
+                    document.getElementById('closeTime30min').textContent = closeTime.toLocaleString('zh-CN') + ` (${remaining.toFixed(1)}分钟后)`;
+                    countdownEl.textContent = ` ⏱️ ${remaining.toFixed(1)}分钟`;
                 } else {
                     statusEl.textContent = '空仓';
                     statusEl.className = 'position-badge badge-empty';
                     countdownEl.textContent = '';
+                    positionDetailsEl.style.display = 'none';
                 }
             }
             
@@ -758,46 +855,70 @@
             }).join('');
         }
         
-        // 更新交易记录
+        // 更新交易记录（分开显示5分钟和30分钟）
         function updateTrades(data) {
-            const tradeList = document.getElementById('tradeList');
-            let allTrades = [];
+            // 更新5分钟交易记录
+            const tradeList5min = document.getElementById('tradeList5min');
+            let trades5min = [];
+            if (data['5min'] && data['5min'].trade_history) {
+                trades5min = data['5min'].trade_history.filter(t => t.type === 'close');
+            }
+            trades5min.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             
-            ['5min', '30min'].forEach(type => {
-                if (data[type] && data[type].trade_history) {
-                    data[type].trade_history.forEach(trade => {
-                        if (trade.type === 'close') {
-                            allTrades.push({
-                                ...trade,
-                                accountType: type
-                            });
-                        }
-                    });
-                }
-            });
+            if (trades5min.length > 0) {
+                tradeList5min.innerHTML = trades5min.map(t => renderTradeItem(t, '5min')).join('');
+            } else {
+                tradeList5min.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">暂无交易记录</div>';
+            }
             
-            allTrades.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            // 更新30分钟交易记录
+            const tradeList30min = document.getElementById('tradeList30min');
+            let trades30min = [];
+            if (data['30min'] && data['30min'].trade_history) {
+                trades30min = data['30min'].trade_history.filter(t => t.type === 'close');
+            }
+            trades30min.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             
-            if (allTrades.length > 0) {
-                tradeList.innerHTML = allTrades.map(t => {
-                    const time = new Date(t.timestamp).toLocaleString('zh-CN');
-                    const isWin = t.result === 'profit';
-                    return `
-                        <div class="trade-item ${isWin ? 'trade-win' : 'trade-loss'}">
-                            <div>
-                                <div>${t.accountType === '5min' ? '⚡ 5分钟' : '📅 30分钟'} | ${t.direction === 'long' ? '做多' : '做空'}</div>
-                                <div style="font-size: 0.8em; color: #888;">${time}</div>
+            if (trades30min.length > 0) {
+                tradeList30min.innerHTML = trades30min.map(t => renderTradeItem(t, '30min')).join('');
+            } else {
+                tradeList30min.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">暂无交易记录</div>';
+            }
+        }
+        
+        // 渲染单个交易记录
+        function renderTradeItem(t, accountType) {
+            const time = new Date(t.timestamp).toLocaleString('zh-CN');
+            const isWin = t.result === 'profit';
+            const icon = accountType === '5min' ? '⚡' : '📅';
+            
+            return `
+                <div class="trade-item ${isWin ? 'trade-win' : 'trade-loss'}" style="margin-bottom: 10px; padding: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 5px;">
+                                ${icon} ${t.direction === 'long' ? '做多' : '做空'} | ${isWin ? '✅ 盈利' : '❌ 亏损'}
                             </div>
-                            <div style="text-align: right;">
-                                <div style="color: ${isWin ? '#00ff88' : '#ff4757'}; font-weight: 600;">
-                                    ${isWin ? '+' : ''}${t.profit?.toFixed(2) || 0} USDT
-                                </div>
-                                <div style="font-size: 0.8em; color: #888;">
-                                    ${t.result === 'profit' ? '✅ 盈利' : '❌ 亏损'}
-                                </div>
+                            <div style="font-size: 0.8em; color: #888;">${time}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="color: ${isWin ? '#00ff88' : '#ff4757'}; font-weight: 600; font-size: 1.1em;">
+                                ${isWin ? '+' : ''}${t.profit?.toFixed(2) || 0} USDT
                             </div>
                         </div>
-                    `;
+                    </div>
+                    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85em;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #888;">开仓价: $${t.entry_price?.toFixed(2) || '--'}</span>
+                            <span style="color: #888;">平仓价: $${t.exit_price?.toFixed(2) || '--'}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                            <span style="color: #888;">开仓金额: ${t.amount || 0} USDT</span>
+                            <span style="color: #888;">盈亏: ${isWin ? '+' : ''}${t.profit?.toFixed(2) || 0} USDT</span>
+                        </div>
+                    </div>
+                </div>
+            `;
                 }).join('');
             } else {
                 tradeList.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">暂无交易记录</div>';

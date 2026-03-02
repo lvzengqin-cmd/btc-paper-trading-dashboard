@@ -154,6 +154,18 @@
                         </div>
                     </div>
                     
+                    <!-- 多时间框架分析 -->
+                    <div id="eventContractMultiframe" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #b8a0ff;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div style="font-weight: 600; color: #b8a0ff;">📊 多时间框架分析</div>
+                            <div id="eventMultiframeStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
+                        </div>
+                        <div id="eventMultiframeDetails" style="font-size: 0.9em;">
+                            <div>当前价格: <span id="eventMultiframePrice">--</span></div>
+                            <div style="margin-top: 5px; color: #888;">4H/30M/15M多周期综合分析</div>
+                        </div>
+                    </div>
+                    
                     <!-- AI预测 -->
                     <div id="eventContractAI" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; border-left: 4px solid #00ff88;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
@@ -689,6 +701,9 @@
             // 更新4个固定信号源的实时显示
             updateRealTimeSignals(data);
             
+            // 更新事件合约显示
+            updateEventContracts(data);
+            
             // 更新信号列表（所有信号历史）
             updateSignals(data);
             
@@ -728,8 +743,119 @@
                 const typeEl = document.getElementById(source.elementId + 'Type');
                 const detailEl = document.getElementById(source.elementId + 'Detail');
                 
-                if (latestSignal) {
-                    // 有信号，显示详细信息
+                if (typeEl && detailEl) {
+                    if (latestSignal) {
+                        // 有信号，显示详细信息
+                        let signalText = '';
+                        let signalColor = '';
+                        
+                        switch(latestSignal.signal_type) {
+                            case 'strong_long':
+                                signalText = '🔥 强烈做多';
+                                signalColor = '#00ff88';
+                                break;
+                            case 'strong_short':
+                                signalText = '🔥 强烈做空';
+                                signalColor = '#ff4757';
+                                break;
+                            case 'long':
+                                signalText = '🟢 做多';
+                                signalColor = '#00ff88';
+                                break;
+                            case 'short':
+                                signalText = '🔴 做空';
+                                signalColor = '#ff4757';
+                                break;
+                            case 'neutral':
+                                signalText = '⏸️ 观望';
+                                signalColor = '#888';
+                                break;
+                            default:
+                                signalText = '⏸️ 无信号';
+                                signalColor = '#888';
+                        }
+                        
+                        typeEl.innerHTML = `<span style="color: ${signalColor}; font-weight: 600;">${signalText}</span>`;
+                        
+                        const timeStr = new Date(latestSignal.timestamp).toLocaleTimeString('zh-CN', {hour: '2-digit', minute:'2-digit'});
+                        const strengthStr = latestSignal.strength ? `强度 ${latestSignal.strength}/5` : '';
+                        detailEl.innerHTML = `${timeStr} | $${latestSignal.price?.toFixed(2) || '--'} ${strengthStr}`;
+                    } else {
+                        // 无信号
+                        typeEl.innerHTML = '<span style="color: #666;">⏸️ 无信号</span>';
+                        detailEl.innerHTML = '等待交易机会...';
+                    }
+                }
+            });
+        }
+        
+        // 更新事件合约显示
+        function updateEventContracts(data) {
+            const signals = data.signals_history || [];
+            const now = new Date();
+            const fiveMinutesAgo = new Date(now - 5 * 60 * 1000);
+            const thirtyMinutesAgo = new Date(now - 30 * 60 * 1000);
+            
+            // 获取BTC当前价格
+            const btcPriceEl = document.getElementById('btcPrice');
+            const currentPrice = btcPriceEl ? parseFloat(btcPriceEl.textContent.replace(/[^0-9.]/g, '')) : 0;
+            
+            // 4个事件合约信号源
+            const eventSources = [
+                { id: '5min', elementId: 'event5min', timeRange: fiveMinutesAgo, label: '5分钟' },
+                { id: '30min', elementId: 'event30min', timeRange: thirtyMinutesAgo, label: '30分钟' },
+                { id: 'multiframe', elementId: 'eventMultiframe', timeRange: fiveMinutesAgo, label: '多周期' },
+                { id: 'lstm', elementId: 'eventAI', timeRange: fiveMinutesAgo, label: 'AI' }
+            ];
+            
+            eventSources.forEach(source => {
+                const statusEl = document.getElementById(source.elementId + 'Status');
+                const priceEl = document.getElementById(source.elementId + 'Price');
+                
+                if (statusEl && priceEl) {
+                    // 获取该信号源的最新信号
+                    const sourceSignals = signals.filter(s => 
+                        s.source === source.id && 
+                        new Date(s.timestamp) > source.timeRange
+                    );
+                    
+                    const latestSignal = sourceSignals.length > 0 ? sourceSignals[0] : null;
+                    
+                    // 更新价格显示
+                    priceEl.textContent = latestSignal ? `$${latestSignal.price?.toFixed(2) || currentPrice.toFixed(2)}` : `$${currentPrice.toFixed(2)}`;
+                    
+                    if (latestSignal && latestSignal.signal_type !== 'neutral') {
+                        // 有交易信号
+                        let signalText = '';
+                        let signalColor = '';
+                        
+                        switch(latestSignal.signal_type) {
+                            case 'strong_long':
+                            case 'long':
+                                signalText = '🟢 做多';
+                                signalColor = '#00ff88';
+                                break;
+                            case 'strong_short':
+                            case 'short':
+                                signalText = '🔴 做空';
+                                signalColor = '#ff4757';
+                                break;
+                            default:
+                                signalText = '⏸️ 观望';
+                                signalColor = '#888';
+                        }
+                        
+                        const strengthStr = latestSignal.strength ? ` ${latestSignal.strength}/5` : '';
+                        statusEl.innerHTML = `<span style="color: ${signalColor}; font-weight: 600;">${signalText}${strengthStr}</span>`;
+                    } else {
+                        // 无信号或观望
+                        statusEl.innerHTML = '<span style="color: #666;">⏸️ 等待信号</span>';
+                    }
+                }
+            });
+        }
+        
+        // 更新信号列表（所有信号历史）
                     let signalText = '';
                     let signalColor = '';
                     

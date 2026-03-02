@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-03-03T00:58:00.632253",
+    "source": "30min",
+    "type": "status",
+    "content": "当前信号: ⏸️ 观望（30分钟周期）\n原因: 无高概率信号"
+  },
+  {
+    "timestamp": "2026-03-03T00:55:59.608444",
+    "source": "30min",
+    "type": "status",
+    "content": "当前信号: ⏸️ 观望（30分钟周期）\n原因: 无高概率信号"
+  },
+  {
     "timestamp": "2026-03-03T00:52:03.380072",
     "source": "30min",
     "type": "status",

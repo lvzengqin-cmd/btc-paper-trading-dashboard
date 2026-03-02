@@ -1,5 +1,29 @@
 [
   {
+    "timestamp": "2026-03-03T00:12:03.983717",
+    "source": "lstm",
+    "type": "signal",
+    "content": "LSTM AI预测：🔴 做空信号，置信度74.8%，当前价格$68,524"
+  },
+  {
+    "timestamp": "2026-03-03T00:12:03.983377",
+    "source": "multiframe",
+    "type": "alert",
+    "content": "多周期监控：4H中性偏多、30M震荡整理、15M轻度看空，1分钟/3分钟出现止跌信号"
+  },
+  {
+    "timestamp": "2026-03-03T00:12:03.982912",
+    "source": "5min",
+    "type": "status",
+    "content": "5分钟周期监控正常运行，当前观望，MACD负值放大短期动能偏弱"
+  },
+  {
+    "timestamp": "2026-03-03T00:12:03.982733",
+    "source": "30min",
+    "type": "signal",
+    "content": "30分钟监控轻仓做多信号，BTC $69,699，大周期共振看涨，1分钟RSI 73.8接近超买区，信号强度3/5"
+  },
+  {
     "timestamp": "2026-03-02T23:49:20.851088",
     "source": "30min",
     "type": "alert",

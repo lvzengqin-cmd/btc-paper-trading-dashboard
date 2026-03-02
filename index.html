@@ -316,43 +316,56 @@
             updateTrades(data);
         }
         
-        // 更新信号列表
+        // 更新信号列表（显示所有信号）
         function updateSignals(data) {
             const signalList = document.getElementById('signalList');
             const allSignals = document.getElementById('allSignals');
             
-            // 从 trade_history 中提取信号
+            // 从 signals_history 获取所有信号
             let signals = [];
-            ['5min', '30min'].forEach(type => {
-                if (data[type] && data[type].trade_history) {
-                    data[type].trade_history.forEach(trade => {
-                        if (trade.type === 'open') {
-                            signals.push({
-                                time: trade.timestamp,
-                                type: type,
-                                direction: trade.direction,
-                                price: trade.price,
-                                isStrong: true
-                            });
-                        }
-                    });
-                }
-            });
+            if (data.signals_history) {
+                signals = data.signals_history;
+            }
             
             // 排序并显示
-            signals.sort((a, b) => new Date(b.time) - new Date(a.time));
+            signals.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             
             const renderSignal = (s) => {
-                const time = new Date(s.time).toLocaleTimeString('zh-CN');
+                const time = new Date(s.timestamp).toLocaleTimeString('zh-CN');
+                const date = new Date(s.timestamp).toLocaleDateString('zh-CN');
                 const isLong = s.direction === 'long';
-                const className = s.isStrong ? (isLong ? 'strong-long' : 'strong-short') : (isLong ? 'light-long' : 'light-short');
-                const typeText = s.isStrong ? (isLong ? '🔥 强烈做多' : '🔥 强烈做空') : (isLong ? '🟡 轻仓做多' : '🟡 轻仓做空');
+                const isStrong = s.signal_type === 'strong_long' || s.signal_type === 'strong_short';
+                
+                let className = 'neutral';
+                let typeText = '⏸️ 观望';
+                let bgStyle = '';
+                
+                if (s.signal_type === 'strong_long') {
+                    className = 'strong-long';
+                    typeText = '🔥 强烈做多';
+                    bgStyle = 'background: linear-gradient(90deg, rgba(0,255,136,0.2), transparent);';
+                } else if (s.signal_type === 'strong_short') {
+                    className = 'strong-short';
+                    typeText = '🔥 强烈做空';
+                    bgStyle = 'background: linear-gradient(90deg, rgba(255,71,87,0.2), transparent);';
+                } else if (s.signal_type === 'long') {
+                    className = 'light-long';
+                    typeText = '🟢 做多';
+                    bgStyle = 'background: linear-gradient(90deg, rgba(0,255,136,0.05), transparent);';
+                } else if (s.signal_type === 'short') {
+                    className = 'light-short';
+                    typeText = '🔴 做空';
+                    bgStyle = 'background: linear-gradient(90deg, rgba(255,71,87,0.05), transparent);';
+                }
+                
+                const strengthBadge = s.strength ? `<span class="signal-strength">强度 ${s.strength}/5</span>` : '';
+                
                 return `
-                    <div class="signal-item ${className}">
-                        <div class="signal-time">${time}</div>
+                    <div class="signal-item ${className}" style="${bgStyle}">
+                        <div class="signal-time">${date}<br>${time}</div>
                         <div class="signal-content">
-                            <div class="signal-type">${typeText}</div>
-                            <div class="signal-price">${s.type === '5min' ? '⚡ 5分钟' : '📅 30分钟'} | 价格: $${s.price?.toFixed(2) || '--'}</div>
+                            <div class="signal-type">${typeText} ${strengthBadge}</div>
+                            <div class="signal-price">${s.source === '5min' ? '⚡ 5分钟' : s.source === '30min' ? '📅 30分钟' : '📊 多周期'} | 价格: $${s.price?.toFixed(2) || '--'}</div>
                         </div>
                     </div>
                 `;

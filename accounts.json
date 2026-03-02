@@ -1,0 +1,57 @@
+{
+  "5min": {
+    "name": "5\u5206\u949f\u4e8b\u4ef6\u5408\u7ea6\u6a21\u62df\u76d8",
+    "initial_balance": 1000,
+    "current_balance": 1085,
+    "trade_amount": 100,
+    "profit_amount": 85,
+    "loss_amount": 100,
+    "trade_history": [
+      {
+        "type": "open",
+        "position_id": "5min_20260302_194110",
+        "direction": "short",
+        "price": 66043.0,
+        "amount": 100,
+        "timestamp": "2026-03-02T19:41:10.432970"
+      },
+      {
+        "type": "close",
+        "position_id": "5min_20260302_194110",
+        "exit_price": 67363.86,
+        "result": "profit",
+        "profit": 85,
+        "timestamp": "2026-03-02T19:47:08.230673"
+      }
+    ],
+    "created_at": "2026-03-02T19:35:00+08:00"
+  },
+  "30min": {
+    "name": "30\u5206\u949f\u56fa\u5b9a\u5468\u671f\u6a21\u62df\u76d8",
+    "initial_balance": 1000,
+    "current_balance": 900,
+    "trade_amount": 100,
+    "profit_amount": 85,
+    "loss_amount": 100,
+    "trade_history": [
+      {
+        "type": "open",
+        "position_id": "30min_20260302_194110",
+        "direction": "long",
+        "price": 66242.5,
+        "amount": 100,
+        "timestamp": "2026-03-02T19:41:10.433551"
+      },
+      {
+        "type": "close",
+        "position_id": "30min_20260302_194110",
+        "exit_price": 64917.65,
+        "result": "loss",
+        "profit": -100,
+        "timestamp": "2026-03-02T20:20:22.250378"
+      }
+    ],
+    "created_at": "2026-03-02T19:35:00+08:00"
+  },
+  "_last_updated": "2026-03-02T21:35:42.441121"
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "timestamp": "2026-03-02T22:22:56.890078",
+    "source": "5min",
+    "signal_type": "strong_long",
+    "direction": "long",
+    "price": 65527.6,
+    "strength": 4,
+    "confidence": "high",
+    "reason": "\u6d4b\u8bd5\u4fe1\u53f7"
+  }
+]

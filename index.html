@@ -571,112 +571,151 @@
             }
         }
         
-        // 更新每日统计（增强版）
+        // 更新每日统计（分开统计5分钟和30分钟）
         function updateDailyStats(data) {
             const today = new Date().toISOString().split('T')[0];
             const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
             
-            // 获取所有交易历史用于统计
-            let allTrades = [];
-            ['5min', '30min'].forEach(type => {
-                if (data[type] && data[type].trade_history) {
-                    data[type].trade_history.forEach(trade => {
-                        if (trade.type === 'close') {
-                            allTrades.push({
-                                ...trade,
-                                accountType: type,
-                                date: trade.timestamp.split('T')[0]
-                            });
-                        }
-                    });
-                }
-            });
+            // 分别获取5分钟和30分钟的交易
+            const trades5min = [];
+            const trades30min = [];
+            
+            if (data['5min'] && data['5min'].trade_history) {
+                data['5min'].trade_history.forEach(trade => {
+                    if (trade.type === 'close') {
+                        trades5min.push({
+                            ...trade,
+                            date: trade.timestamp.split('T')[0]
+                        });
+                    }
+                });
+            }
+            
+            if (data['30min'] && data['30min'].trade_history) {
+                data['30min'].trade_history.forEach(trade => {
+                    if (trade.type === 'close') {
+                        trades30min.push({
+                            ...trade,
+                            date: trade.timestamp.split('T')[0]
+                        });
+                    }
+                });
+            }
             
             // 按日期分组统计
-            const statsByDate = {};
-            allTrades.forEach(trade => {
-                const date = trade.date;
-                if (!statsByDate[date]) {
-                    statsByDate[date] = { total: 0, wins: 0, losses: 0, profit: 0 };
-                }
-                statsByDate[date].total++;
-                if (trade.result === 'profit') {
-                    statsByDate[date].wins++;
-                    statsByDate[date].profit += trade.profit || 0;
-                } else {
-                    statsByDate[date].losses++;
-                    statsByDate[date].profit += trade.profit || 0;
-                }
-            });
+            function groupByDate(trades) {
+                const statsByDate = {};
+                trades.forEach(trade => {
+                    const date = trade.date;
+                    if (!statsByDate[date]) {
+                        statsByDate[date] = { total: 0, wins: 0, losses: 0, profit: 0 };
+                    }
+                    statsByDate[date].total++;
+                    if (trade.result === 'profit') {
+                        statsByDate[date].wins++;
+                        statsByDate[date].profit += trade.profit || 0;
+                    } else {
+                        statsByDate[date].losses++;
+                        statsByDate[date].profit += trade.profit || 0;
+                    }
+                });
+                return statsByDate;
+            }
+            
+            const stats5min = groupByDate(trades5min);
+            const stats30min = groupByDate(trades30min);
             
             // 渲染今日统计
-            renderDailyCard('today', statsByDate[today]);
+            renderAccountStats('today', '5min', stats5min[today]);
+            renderAccountStats('today', '30min', stats30min[today]);
             
             // 渲染昨日统计
-            renderDailyCard('yesterday', statsByDate[yesterday]);
+            renderAccountStats('yesterday', '5min', stats5min[yesterday]);
+            renderAccountStats('yesterday', '30min', stats30min[yesterday]);
             
-            // 渲染历史统计（最近7天）
-            renderHistoryStats(statsByDate);
+            // 渲染历史统计（分开显示）
+            renderHistoryStatsByAccount(stats5min, stats30min);
         }
         
-        // 渲染每日统计卡片
-        function renderDailyCard(prefix, stats) {
+        // 渲染单个账户的统计
+        function renderAccountStats(prefix, accountType, stats) {
+            const el = document.getElementById(`${prefix}${accountType}`);
+            if (!el) return;
+            
             if (!stats || stats.total === 0) {
-                document.getElementById(`${prefix}5min`).innerHTML = '<div style="color: #666;">无交易</div>';
-                document.getElementById(`${prefix}30min`).innerHTML = '<div style="color: #666;">无交易</div>';
+                el.innerHTML = '<div style="color: #666;">无交易</div>';
                 return;
             }
             
             const winRate = stats.total > 0 ? (stats.wins / stats.total * 100).toFixed(1) : 0;
             
-            ['5min', '30min'].forEach(type => {
-                const el = document.getElementById(`${prefix}${type}`);
-                if (el) {
-                    el.innerHTML = `
-                        <div class="daily-value">${stats.total} 单</div>
-                        <div style="color: #00ff88;">✅ 盈利: ${stats.wins} 单</div>
-                        <div style="color: #ff4757;">❌ 亏损: ${stats.losses} 单</div>
-                        <div style="margin-top: 10px; color: #ffa502;">胜率: ${winRate}%</div>
-                        <div style="margin-top: 5px; ${stats.profit >= 0 ? 'color: #00ff88;' : 'color: #ff4757;'}">
-                            盈亏: ${stats.profit >= 0 ? '+' : ''}${stats.profit.toFixed(2)} USDT
-                        </div>
-                    `;
-                }
-            });
+            el.innerHTML = `
+                <div class="daily-value">${stats.total} 单</div>
+                <div style="color: #00ff88;">✅ 盈利: ${stats.wins} 单</div>
+                <div style="color: #ff4757;">❌ 亏损: ${stats.losses} 单</div>
+                <div style="margin-top: 10px; color: #ffa502;">胜率: ${winRate}%</div>
+                <div style="margin-top: 5px; ${stats.profit >= 0 ? 'color: #00ff88;' : 'color: #ff4757;'}">
+                    盈亏: ${stats.profit >= 0 ? '+' : ''}${stats.profit.toFixed(2)} USDT
+                </div>
+            `;
         }
         
-        // 渲染历史统计
-        function renderHistoryStats(statsByDate) {
+        // 渲染历史统计（分开5分钟和30分钟）
+        function renderHistoryStatsByAccount(stats5min, stats30min) {
             const historyEl = document.getElementById('historyStats');
             if (!historyEl) return;
             
-            const dates = Object.keys(statsByDate).sort().reverse().slice(0, 7);
+            // 获取所有日期
+            const allDates = [...new Set([...Object.keys(stats5min), ...Object.keys(stats30min)])].sort().reverse().slice(0, 7);
             
-            if (dates.length === 0) {
+            if (allDates.length === 0) {
                 historyEl.innerHTML = '<div style="color: #666; padding: 20px;">暂无历史数据</div>';
                 return;
             }
             
-            historyEl.innerHTML = dates.map(date => {
-                const stats = statsByDate[date];
-                const winRate = stats.total > 0 ? (stats.wins / stats.total * 100).toFixed(1) : 0;
+            historyEl.innerHTML = allDates.map(date => {
+                const s5 = stats5min[date] || { total: 0, wins: 0, losses: 0, profit: 0 };
+                const s30 = stats30min[date] || { total: 0, wins: 0, losses: 0, profit: 0 };
+                const totalProfit = s5.profit + s30.profit;
+                
                 return `
-                    <div class="daily-card" style="margin-bottom: 10px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="daily-card" style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                             <div class="daily-title">${date}</div>
-                            <div style="color: ${stats.profit >= 0 ? '#00ff88' : '#ff4757'}; font-weight: 600;">
-                                ${stats.profit >= 0 ? '+' : ''}${stats.profit.toFixed(2)} USDT
+                            <div style="color: ${totalProfit >= 0 ? '#00ff88' : '#ff4757'}; font-weight: 600;">
+                                总计: ${totalProfit >= 0 ? '+' : ''}${totalProfit.toFixed(2)} USDT
                             </div>
                         </div>
-                        <div style="display: flex; gap: 20px; margin-top: 10px;">
-                            <div>总: ${stats.total}单</div>
-                            <div style="color: #00ff88;">✅ ${stats.wins}</div>
-                            <div style="color: #ff4757;">❌ ${stats.losses}</div>
-                            <div style="color: #ffa502;">胜率 ${winRate}%</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div style="padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                                <div style="color: #888; font-size: 0.85em; margin-bottom: 5px;">⚡ 5分钟</div>
+                                <div style="display: flex; gap: 10px;">
+                                    <span>${s5.total}单</span>
+                                    <span style="color: #00ff88;">✅${s5.wins}</span>
+                                    <span style="color: #ff4757;">❌${s5.losses}</span>
+                                    <span style="color: #ffa502;">${s5.total > 0 ? (s5.wins/s5.total*100).toFixed(0) : 0}%</span>
+                                </div>
+                                <div style="${s5.profit >= 0 ? 'color: #00ff88;' : 'color: #ff4757;'} font-size: 0.9em; margin-top: 5px;">
+                                    ${s5.profit >= 0 ? '+' : ''}${s5.profit.toFixed(2)} USDT
+                                </div>
+                            </div>
+                            <div style="padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                                <div style="color: #888; font-size: 0.85em; margin-bottom: 5px;">📅 30分钟</div>
+                                <div style="display: flex; gap: 10px;">
+                                    <span>${s30.total}单</span>
+                                    <span style="color: #00ff88;">✅${s30.wins}</span>
+                                    <span style="color: #ff4757;">❌${s30.losses}</span>
+                                    <span style="color: #ffa502;">${s30.total > 0 ? (s30.wins/s30.total*100).toFixed(0) : 0}%</span>
+                                </div>
+                                <div style="${s30.profit >= 0 ? 'color: #00ff88;' : 'color: #ff4757;'} font-size: 0.9em; margin-top: 5px;">
+                                    ${s30.profit >= 0 ? '+' : ''}${s30.profit.toFixed(2)} USDT
+                                </div>
+                            </div>
                         </div>
                     </div>
                 `;
             }).join('');
+        }
         }
         
         // 更新交易记录

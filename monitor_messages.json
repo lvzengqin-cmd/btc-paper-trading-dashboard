@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-03-03T01:05:58.980111",
+    "source": "30min",
+    "type": "signal",
+    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🔥 强烈做多（30分钟周期）\n\n💰 当前价格: $69,390.10\n📊 信号强度: 5/5\n🎚️ 置信度: high\n\n📈 趋势状态:\n  大周期: bullish (4H:bullish, 30M:bullish, 15M:bullish)\n  1分钟: bearish (RSI: 29.9)\n\n📋 做单理由:\n  1. 大周期看涨(4H:bullish, 30M:bullish, 15M:bullish)\n  2. RSI严重超卖(29.9)\n  3. 触及布林下轨($69220)\n  4. 接近近期低点($69322)\n\n📊 24h统计: 涨跌 +4.98%\n\n⏰ 01:05:58\n⚠️ 仅供参考，不构成投资建议"
+  },
+  {
+    "timestamp": "2026-03-03T01:03:58.276845",
+    "source": "30min",
+    "type": "signal",
+    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🔥 强烈做多（30分钟周期）\n\n💰 当前价格: $69,393.00\n📊 信号强度: 5/5\n🎚️ 置信度: high\n\n📈 趋势状态:\n  大周期: bullish (4H:bullish, 30M:bullish, 15M:bullish)\n  1分钟: neutral (RSI: 26.7)\n\n📋 做单理由:\n  1. 大周期看涨(4H:bullish, 30M:bullish, 15M:bullish)\n  2. RSI严重超卖(26.7)\n  3. 触及布林下轨($69232)\n  4. 接近近期低点($69322)\n\n📊 24h统计: 涨跌 +5.00%\n\n⏰ 01:03:58\n⚠️ 仅供参考，不构成投资建议"
+  },
+  {
     "timestamp": "2026-03-03T00:58:00.632253",
     "source": "30min",
     "type": "status",

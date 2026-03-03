@@ -1322,26 +1322,7 @@
         async function fetchBTCPrice() {
             let lastError = null;
             
-            // 尝试1：本地缓存文件
-            try {
-                const cacheResponse = await fetch('btc_price.json?t=' + Date.now(), {
-                    cache: 'no-cache',
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (cacheResponse.ok) {
-                    const cacheData = await cacheResponse.json();
-                    if (cacheData.price && cacheData.price > 0) {
-                        updatePriceDisplay(cacheData);
-                        console.log('✅ 价格已更新（缓存）:', cacheData.price);
-                        return;
-                    }
-                }
-            } catch (e) {
-                lastError = e;
-                console.log('本地缓存获取失败:', e.message);
-            }
-            
-            // 尝试2：Binance API
+            // 尝试1：Binance API（优先使用实时API）
             try {
                 const response = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT', {
                     cache: 'no-cache'
@@ -1365,6 +1346,25 @@
             } catch (e) {
                 lastError = e;
                 console.log('Binance API获取失败:', e.message);
+            }
+            
+            // 尝试2：本地缓存文件（API失败时备用）
+            try {
+                const cacheResponse = await fetch('btc_price.json?t=' + Date.now(), {
+                    cache: 'no-cache',
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (cacheResponse.ok) {
+                    const cacheData = await cacheResponse.json();
+                    if (cacheData.price && cacheData.price > 0) {
+                        updatePriceDisplay(cacheData);
+                        console.log('✅ 价格已更新（缓存）:', cacheData.price);
+                        return;
+                    }
+                }
+            } catch (e) {
+                lastError = e;
+                console.log('本地缓存获取失败:', e.message);
             }
             
             // 尝试3：Binance Futures API

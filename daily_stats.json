@@ -1,6 +1,6 @@
 {
   "date": "2026-03-03",
-  "last_updated": "2026-03-03T17:39:05.302193",
+  "last_updated": "2026-03-03T17:42:02.754057",
   "accounts": {
     "5min": {
       "name": "5分钟事件合约",
@@ -12,11 +12,11 @@
     },
     "30min": {
       "name": "30分钟固定周期",
-      "balance": 1100,
+      "balance": 1285.0,
       "initial": 1000,
-      "profit": 100,
-      "trades": 1,
-      "active": true
+      "profit": 285.0,
+      "trades": 2,
+      "active": false
     }
   }
 }

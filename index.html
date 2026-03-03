@@ -148,7 +148,7 @@
                             <div class="stat-label">亏损</div>
                         </div>
                     </div>
-                    <!-- 持仓详情 -->
+                    <!-- 持仓详情 - 事件合约只显示开仓信息和平仓时间 -->
                     <div id="positionDetails5min" style="margin-top: 15px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; display: none;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                             <span style="color: #888;">开仓时间</span>
@@ -161,10 +161,6 @@
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                             <span style="color: #888;">开仓金额</span>
                             <span id="openAmount5min">--</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="color: #888;">当前盈亏</span>
-                            <span id="currentPnl5min">--</span>
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
                             <span style="color: #888;">平仓时间</span>
@@ -197,7 +193,7 @@
                             <div class="stat-label">亏损</div>
                         </div>
                     </div>
-                    <!-- 持仓详情 -->
+                    <!-- 持仓详情 - 事件合约只显示开仓信息和平仓时间 -->
                     <div id="positionDetails30min" style="margin-top: 15px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; display: none;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                             <span style="color: #888;">开仓时间</span>
@@ -210,10 +206,6 @@
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                             <span style="color: #888;">开仓金额</span>
                             <span id="openAmount30min">--</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="color: #888;">当前盈亏</span>
-                            <span id="currentPnl30min">--</span>
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
                             <span style="color: #888;">平仓时间</span>
@@ -238,7 +230,7 @@
                     <div id="eventContract5min" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #00d4ff;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                             <div style="font-weight: 600; color: #00d4ff;">⚡ 5分钟事件合约</div>
-                            <div id="event5minStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
+                            <div id="event5minStatus" style="font-size: 0.9em; color: #666;">🔴 无信号</div>
                         </div>
                         <div id="event5minDetails" style="font-size: 0.9em;">
                             <div>当前价格: <span id="event5minPrice">--</span></div>
@@ -250,7 +242,7 @@
                     <div id="eventContract30min" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #ffa502;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                             <div style="font-weight: 600; color: #ffa502;">📅 30分钟事件合约</div>
-                            <div id="event30minStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
+                            <div id="event30minStatus" style="font-size: 0.9em; color: #666;">🔴 无信号</div>
                         </div>
                         <div id="event30minDetails" style="font-size: 0.9em;">
                             <div>当前价格: <span id="event30minPrice">--</span></div>
@@ -262,7 +254,7 @@
                     <div id="eventContractMultiframe" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #b8a0ff;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                             <div style="font-weight: 600; color: #b8a0ff;">📊 多时间框架分析</div>
-                            <div id="eventMultiframeStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
+                            <div id="eventMultiframeStatus" style="font-size: 0.9em; color: #666;">🔴 无信号</div>
                         </div>
                         <div id="eventMultiframeDetails" style="font-size: 0.9em;">
                             <div>当前价格: <span id="eventMultiframePrice">--</span></div>
@@ -274,9 +266,13 @@
                     <div id="eventContractAI" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; border-left: 4px solid #00ff88;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                             <div style="font-weight: 600; color: #00ff88;">🤖 AI深度学习预测</div>
-                            <div id="eventAIStatus" style="font-size: 0.9em; color: #888;">⏸️ 等待信号</div>
+                            <div id="eventAIStatus" style="font-size: 0.9em; color: #666;">🔴 无信号</div>
                         </div>
                         <div id="eventAIDetails" style="font-size: 0.9em;">
+                            <div>当前价格: <span id="eventAIPrice">--</span></div>
+                            <div style="margin-top: 5px; color: #888;">AI模型预测涨跌方向</div>
+                        </div>
+                    </div>em;">
                             <div>当前价格: <span id="eventAIPrice">--</span></div>
                             <div style="margin-top: 5px; color: #888;">AI模型预测涨跌方向</div>
                         </div>
@@ -390,6 +386,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">🎯 AI预测</div>
+                    <div id="aiPredictionTime" style="font-size: 0.85em; color: #888;">--</div>
                 </div>
                 <div id="aiPrediction">
                     <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
@@ -604,16 +601,9 @@
                     document.getElementById('openPrice5min').textContent = '$' + entryPrice.toFixed(2);
                     document.getElementById('openAmount5min').textContent = amount.toFixed(2) + ' USDT';
                     
-                    // 计算当前盈亏
-                    const currentPrice = parseFloat(document.getElementById('btcPrice').textContent.replace(/[^0-9.]/g, '')) || entryPrice;
-                    const priceDiff = isLong ? (currentPrice - entryPrice) : (entryPrice - currentPrice);
-                    const currentPnl = priceDiff * (amount / entryPrice);
-                    const pnlEl = document.getElementById('currentPnl5min');
-                    pnlEl.textContent = (currentPnl >= 0 ? '+' : '') + currentPnl.toFixed(2) + ' USDT';
-                    pnlEl.style.color = currentPnl >= 0 ? '#00ff88' : '#ff4757';
-                    
-                    document.getElementById('closeTime5min').textContent = isNaN(closeTime.getTime()) ? '--' : (closeTime.toLocaleString('zh-CN') + ` (${remaining.toFixed(1)}分钟后)`);
-                    countdownEl.textContent = isNaN(remaining) ? '' : ` ⏱️ ${remaining.toFixed(1)}分钟`;
+                    // 事件合约：只显示平仓时间（固定5分钟后）
+                    document.getElementById('closeTime5min').textContent = isNaN(closeTime.getTime()) ? '--' : closeTime.toLocaleString('zh-CN');
+                    countdownEl.textContent = isNaN(remaining) ? '' : ` ⏱️ ${remaining.toFixed(1)}分钟后平仓`;
                 } else {
                     statusEl.textContent = '空仓';
                     statusEl.className = 'position-badge badge-empty';
@@ -665,16 +655,9 @@
                     document.getElementById('openPrice30min').textContent = '$' + entryPrice.toFixed(2);
                     document.getElementById('openAmount30min').textContent = amount.toFixed(2) + ' USDT';
                     
-                    // 计算当前盈亏
-                    const currentPrice = parseFloat(document.getElementById('btcPrice').textContent.replace(/[^0-9.]/g, '')) || entryPrice;
-                    const priceDiff = isLong ? (currentPrice - entryPrice) : (entryPrice - currentPrice);
-                    const currentPnl = priceDiff * (amount / entryPrice);
-                    const pnlEl = document.getElementById('currentPnl30min');
-                    pnlEl.textContent = (currentPnl >= 0 ? '+' : '') + currentPnl.toFixed(2) + ' USDT';
-                    pnlEl.style.color = currentPnl >= 0 ? '#00ff88' : '#ff4757';
-                    
-                    document.getElementById('closeTime30min').textContent = isNaN(closeTime.getTime()) ? '--' : (closeTime.toLocaleString('zh-CN') + ` (${remaining.toFixed(1)}分钟后)`);
-                    countdownEl.textContent = isNaN(remaining) ? '' : ` ⏱️ ${remaining.toFixed(1)}分钟`;
+                    // 事件合约：只显示平仓时间（固定30分钟后）
+                    document.getElementById('closeTime30min').textContent = isNaN(closeTime.getTime()) ? '--' : closeTime.toLocaleString('zh-CN');
+                    countdownEl.textContent = isNaN(remaining) ? '' : ` ⏱️ ${remaining.toFixed(1)}分钟后平仓`;
                 } else {
                     statusEl.textContent = '空仓';
                     statusEl.className = 'position-badge badge-empty';
@@ -722,6 +705,16 @@
                     document.getElementById('predDown').textContent = (ai.model_prediction.next_1h?.down || '--') + '%';
                     document.getElementById('aiConfidence').textContent = ((ai.model_prediction.confidence || 0) * 100).toFixed(0) + '%';
                     document.getElementById('aiSuggestion').textContent = ai.model_prediction.suggested_action || '观望';
+                }
+                
+                // 更新AI分析时间戳
+                if (ai.last_updated) {
+                    const updateTime = new Date(ai.last_updated);
+                    const timeStr = updateTime.toLocaleString('zh-CN');
+                    const timeEl = document.getElementById('aiPredictionTime');
+                    if (timeEl) {
+                        timeEl.textContent = `分析时间: ${timeStr}`;
+                    }
                 }
             }
             
@@ -879,24 +872,24 @@
                         switch(latestSignal.signal_type) {
                             case 'strong_long':
                             case 'long':
-                                signalText = '🟢 做多';
+                                signalText = '🟢 有信号 - 做多';
                                 signalColor = '#00ff88';
                                 break;
                             case 'strong_short':
                             case 'short':
-                                signalText = '🔴 做空';
-                                signalColor = '#ff4757';
+                                signalText = '🟢 有信号 - 做空';
+                                signalColor = '#00ff88';
                                 break;
                             default:
-                                signalText = '⏸️ 观望';
-                                signalColor = '#888';
+                                signalText = '🔴 无信号';
+                                signalColor = '#666';
                         }
                         
-                        const strengthStr = latestSignal.strength ? ` ${latestSignal.strength}/5` : '';
+                        const strengthStr = latestSignal.strength ? ` (${latestSignal.strength}/5)` : '';
                         statusEl.innerHTML = `<span style="color: ${signalColor}; font-weight: 600;">${signalText}${strengthStr}</span>`;
                     } else {
-                        // 无信号或观望
-                        statusEl.innerHTML = '<span style="color: #666;">⏸️ 等待信号</span>';
+                        // 无信号
+                        statusEl.innerHTML = '<span style="color: #ff4757; font-weight: 600;">🔴 无信号</span>';
                     }
                 }
             });

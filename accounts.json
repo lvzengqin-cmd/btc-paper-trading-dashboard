@@ -1,6 +1,6 @@
 {
   "5min": {
-    "name": "5\u5206\u949f\u4e8b\u4ef6\u5408\u7ea6",
+    "name": "5分钟事件合约",
     "initial_balance": 1000,
     "current_balance": 1085,
     "trade_history": [
@@ -28,7 +28,7 @@
     }
   },
   "30min": {
-    "name": "30\u5206\u949f\u56fa\u5b9a\u5468\u671f",
+    "name": "30分钟固定周期",
     "initial_balance": 1000,
     "current_balance": 1100,
     "trade_history": [
@@ -78,12 +78,12 @@
       "price": 98420.0,
       "strength": 3,
       "confidence": "medium",
-      "reason": "30\u5206\u949f\u76d1\u63a7\u663e\u793aBTC $98,420\uff0c\u5efa\u8bae\u51c6\u5907\u505a\u591a",
+      "reason": "30分钟监控显示BTC $98,420，建议准备做多",
       "details": {
         "entry_range": "$98,450-$98,650",
         "stop_loss": "97,650",
         "take_profit": "99,850",
-        "full_analysis": "\n\u5165\u573a\u533a\u95f4: $98,450-$98,650\n\u6b62\u635f: $97,650\n\u6b62\u76c8: $99,850\n\u5206\u6790: 4H\u4e2d\u6027\u504f\u591a\u300130M\u9707\u8361\u6574\u7406\u300115M\u8f7b\u5ea6\u770b\u7a7a\uff0c1\u5206\u949f/3\u5206\u949f\u51fa\u73b0\u6b62\u8dcc\u4fe1\u53f7\n"
+        "full_analysis": "\n入场区间: $98,450-$98,650\n止损: $97,650\n止盈: $99,850\n分析: 4H中性偏多、30M震荡整理、15M轻度看空，1分钟/3分钟出现止跌信号\n"
       }
     },
     {
@@ -94,7 +94,7 @@
       "price": 68973.0,
       "strength": 3,
       "confidence": "high",
-      "reason": "RSI\u8d85\u4e70(69.1)\u56de\u843d\uff0c\u5927\u5468\u671fneutral"
+      "reason": "RSI超买(69.1)回落，大周期neutral"
     },
     {
       "timestamp": "2026-03-02T23:26:20.921027",
@@ -104,7 +104,7 @@
       "price": 68524.32,
       "strength": 3,
       "confidence": "high",
-      "reason": "LSTM AI\u6df1\u5ea6\u5b66\u4e60\u9884\u6d4b: \ud83d\udd34 \u505a\u7a7a, \u7f6e\u4fe1\u5ea674.8%"
+      "reason": "LSTM AI深度学习预测: 🔴 做空, 置信度74.8%"
     },
     {
       "timestamp": "2026-03-02T23:19:31.642485",
@@ -114,7 +114,7 @@
       "price": null,
       "strength": 0,
       "confidence": "low",
-      "reason": "0\u5206\u949f\u76d1\u63a7\u8f7b\u4ed3\u505a\u591a\u4fe1\u53f7\uff0cBTC $68,313\uff0c\u5927\u5468\u671f\u5171\u632f\u770b\u6da8\uff0c1\u5206\u949fRSI 82\u8fdb\u5165\u8d85\u4e70\u533a\uff0c\u4fe1\u53f7\u5f3a\u5ea63/5\uff0c\u6682\u4e0d\u89e6\u53d1\u6a21\u62df\u76d8\u5f00\u4ed3\u3002"
+      "reason": "0分钟监控轻仓做多信号，BTC $68,313，大周期共振看涨，1分钟RSI 82进入超买区，信号强度3/5，暂不触发模拟盘开仓。"
     },
     {
       "timestamp": "2026-03-02T22:59:20.071762",
@@ -124,7 +124,7 @@
       "price": 66954.3,
       "strength": 0,
       "confidence": "medium",
-      "reason": "4H/30M/15M\u5747\u770b\u6da8\uff0c\u4f461\u5206\u949fRSI\u56de\u843dMACD\u6b7b\u53c9\uff0c\u89c2\u671b\u7b49\u5f85"
+      "reason": "4H/30M/15M均看涨，但1分钟RSI回落MACD死叉，观望等待"
     },
     {
       "timestamp": "2026-03-02T22:54:20.071758",
@@ -134,7 +134,7 @@
       "price": 66954.3,
       "strength": 0,
       "confidence": "low",
-      "reason": "\u5927\u5468\u671f\u770b\u6da8\u4f46\u5c0f\u5468\u671f\u8c03\u6574\uff0c\u65e0\u9ad8\u6982\u7387\u5165\u573a\u4fe1\u53f7"
+      "reason": "大周期看涨但小周期调整，无高概率入场信号"
     },
     {
       "timestamp": "2026-03-02T22:49:20.071737",
@@ -144,7 +144,7 @@
       "price": 66954.3,
       "strength": 0,
       "confidence": "low",
-      "reason": "RSI\u4ece\u8d85\u4e70\u533a\u56de\u843d\uff0cMACD\u5f62\u6210\u6b7b\u53c9\uff0c\u5efa\u8bae\u89c2\u671b\u7b49\u5f85\u66f4\u660e\u786e\u7684\u5165\u573a\u70b9"
+      "reason": "RSI从超买区回落，MACD形成死叉，建议观望等待更明确的入场点"
     },
     {
       "timestamp": "2026-03-02T22:31:13.287362",
@@ -154,7 +154,7 @@
       "price": 65379.1,
       "strength": 2,
       "confidence": "medium",
-      "reason": "\u6d4b\u8bd5\u4fe1\u53f73"
+      "reason": "测试信号3"
     },
     {
       "timestamp": "2026-03-02T21:31:13.287358",
@@ -164,7 +164,7 @@
       "price": 65600.0,
       "strength": 5,
       "confidence": "high",
-      "reason": "\u6d4b\u8bd5\u4fe1\u53f72"
+      "reason": "测试信号2"
     },
     {
       "timestamp": "2026-03-02T20:31:13.287342",
@@ -174,7 +174,7 @@
       "price": 65400.0,
       "strength": 4,
       "confidence": "high",
-      "reason": "\u6d4b\u8bd5\u4fe1\u53f71"
+      "reason": "测试信号1"
     },
     {
       "timestamp": "2026-03-02T22:22:56.890078",
@@ -184,15 +184,15 @@
       "price": 65527.6,
       "strength": 4,
       "confidence": "high",
-      "reason": "\u6d4b\u8bd5\u4fe1\u53f7"
+      "reason": "测试信号"
     }
   ],
   "ai_models": [
     {
       "id": "kimi-coding-v2.5",
       "name": "Kimi-Coding-v2.5",
-      "type": "\u591a\u5468\u671f\u6280\u672f\u5206\u6790",
-      "description": "\u57fa\u4e8e\u591a\u65f6\u95f4\u6846\u67b6\u7684\u6280\u672f\u5206\u6790\u6a21\u578b",
+      "type": "多周期技术分析",
+      "description": "基于多时间框架的技术分析模型",
       "accuracy": 62.5,
       "total_signals": 8,
       "win_signals": 5,
@@ -200,42 +200,55 @@
     }
   ],
   "ai_analysis": {
-    "current_model": "kimi-coding-v2.5",
-    "current_trend": {
-      "4H": "bullish",
-      "30M": "bullish",
-      "15M": "neutral",
-      "overall": "\u770b\u6da8"
-    },
-    "key_levels": {
-      "support": [
-        66000,
-        65500,
-        65000
-      ],
-      "resistance": [
-        66500,
-        67000,
-        67500
-      ]
-    },
-    "indicators": {
-      "RSI_4H": 62.5,
-      "RSI_30M": 58.3,
-      "RSI_15M": 45.2,
-      "MACD_4H": "bullish",
-      "MACD_30M": "bullish",
-      "BB_position": "\u4e2d\u8f68\u9644\u8fd1"
-    },
-    "model_prediction": {
-      "next_1h": {
-        "up": 65,
-        "down": 35
+    "latest_signals": [
+      {
+        "time": "2026-03-03T08:11:57.169609",
+        "source": "30min",
+        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,822.50\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 54.1)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
       },
-      "confidence": 0.68,
-      "suggested_action": "\u8f7b\u4ed3\u505a\u591a"
-    },
-    "last_updated": "2026-03-02T23:02:18.766762"
+      {
+        "time": "2026-03-03T08:10:18.544574",
+        "source": "30min",
+        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🔥 强烈做多（30分钟周期）\n\n💰 当前价格: $68,908.40\n📊 信号强度: 5/5\n🎚️ 置信度: high\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: bullish (RSI: 64.9)\n\n📋 做单理由:\n  1. 大周期中性\n  2. 1分钟趋"
+      },
+      {
+        "time": "2026-03-03T08:06:58.913725",
+        "source": "30min",
+        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🔥 强烈做多（30分钟周期）\n\n💰 当前价格: $68,928.20\n📊 信号强度: 5/5\n🎚️ 置信度: high\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: bullish (RSI: 56.1)\n\n📋 做单理由:\n  1. 大周期中性\n  2. 1分钟趋"
+      },
+      {
+        "time": "2026-03-03T07:59:56.890952",
+        "source": "30min",
+        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,799.00\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 47.3)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
+      },
+      {
+        "time": "2026-03-03T07:57:57.100264",
+        "source": "30min",
+        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,770.80\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 45.3)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
+      },
+      {
+        "time": "2026-03-03T07:55:59.179774",
+        "source": "30min",
+        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,787.30\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 48.8)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
+      },
+      {
+        "time": "2026-03-03T07:54:00.548265",
+        "source": "30min",
+        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,845.90\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 57.1)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
+      },
+      {
+        "time": "2026-03-03T07:51:59.370033",
+        "source": "30min",
+        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,872.40\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 52.4)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
+      },
+      {
+        "time": "2026-03-03T07:49:59.539229",
+        "source": "30min",
+        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,878.80\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 63.1)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
+      }
+    ],
+    "signal_count_24h": 100,
+    "last_updated": "2026-03-03T16:29:04.793005"
   },
   "performance": {
     "total_trades": 2,
@@ -246,5 +259,6 @@
     "best_trade": 100,
     "worst_trade": 85
   },
-  "_last_updated": "2026-03-03T07:33:06.666403"
+  "_last_updated": "2026-03-03T16:29:04.792359",
+  "_sync_version": "2.0"
 }

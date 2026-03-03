@@ -588,26 +588,32 @@
                     
                     // 显示持仓详情
                     positionDetailsEl.style.display = 'block';
-                    const opened = new Date(acc.active_position.opened_at);
+                    // 修复：使用open_time或opened_at字段
+                    const openTimeStr = acc.active_position.open_time || acc.active_position.opened_at || new Date().toISOString();
+                    const opened = new Date(openTimeStr);
                     const now = new Date();
                     const elapsed = (now - opened) / 1000 / 60; // 分钟
                     const remaining = Math.max(0, 5 - elapsed);
                     const closeTime = new Date(opened.getTime() + 5 * 60 * 1000);
                     
-                    document.getElementById('openTime5min').textContent = opened.toLocaleString('zh-CN');
-                    document.getElementById('openPrice5min').textContent = '$' + (acc.active_position.price || 0).toFixed(2);
-                    document.getElementById('openAmount5min').textContent = (acc.active_position.amount || 0) + ' USDT';
+                    // 修复：使用entry_price或price字段
+                    const entryPrice = acc.active_position.entry_price || acc.active_position.price || 0;
+                    const amount = acc.active_position.amount || 100; // 默认100USDT
+                    
+                    document.getElementById('openTime5min').textContent = isNaN(opened.getTime()) ? '--' : opened.toLocaleString('zh-CN');
+                    document.getElementById('openPrice5min').textContent = '$' + entryPrice.toFixed(2);
+                    document.getElementById('openAmount5min').textContent = amount.toFixed(2) + ' USDT';
                     
                     // 计算当前盈亏
-                    const currentPrice = parseFloat(document.getElementById('btcPrice').textContent.replace(/[^0-9.]/g, '')) || acc.active_position.price;
-                    const priceDiff = isLong ? (currentPrice - acc.active_position.price) : (acc.active_position.price - currentPrice);
-                    const currentPnl = priceDiff * (acc.active_position.amount / acc.active_position.price);
+                    const currentPrice = parseFloat(document.getElementById('btcPrice').textContent.replace(/[^0-9.]/g, '')) || entryPrice;
+                    const priceDiff = isLong ? (currentPrice - entryPrice) : (entryPrice - currentPrice);
+                    const currentPnl = priceDiff * (amount / entryPrice);
                     const pnlEl = document.getElementById('currentPnl5min');
                     pnlEl.textContent = (currentPnl >= 0 ? '+' : '') + currentPnl.toFixed(2) + ' USDT';
                     pnlEl.style.color = currentPnl >= 0 ? '#00ff88' : '#ff4757';
                     
-                    document.getElementById('closeTime5min').textContent = closeTime.toLocaleString('zh-CN') + ` (${remaining.toFixed(1)}分钟后)`;
-                    countdownEl.textContent = ` ⏱️ ${remaining.toFixed(1)}分钟`;
+                    document.getElementById('closeTime5min').textContent = isNaN(closeTime.getTime()) ? '--' : (closeTime.toLocaleString('zh-CN') + ` (${remaining.toFixed(1)}分钟后)`);
+                    countdownEl.textContent = isNaN(remaining) ? '' : ` ⏱️ ${remaining.toFixed(1)}分钟`;
                 } else {
                     statusEl.textContent = '空仓';
                     statusEl.className = 'position-badge badge-empty';
@@ -643,26 +649,32 @@
                     
                     // 显示持仓详情
                     positionDetailsEl.style.display = 'block';
-                    const opened = new Date(acc.active_position.opened_at);
+                    // 修复：使用open_time或opened_at字段
+                    const openTimeStr = acc.active_position.open_time || acc.active_position.opened_at || new Date().toISOString();
+                    const opened = new Date(openTimeStr);
                     const now = new Date();
                     const elapsed = (now - opened) / 1000 / 60; // 分钟
                     const remaining = Math.max(0, 30 - elapsed);
                     const closeTime = new Date(opened.getTime() + 30 * 60 * 1000);
                     
-                    document.getElementById('openTime30min').textContent = opened.toLocaleString('zh-CN');
-                    document.getElementById('openPrice30min').textContent = '$' + (acc.active_position.price || 0).toFixed(2);
-                    document.getElementById('openAmount30min').textContent = (acc.active_position.amount || 0) + ' USDT';
+                    // 修复：使用entry_price或price字段
+                    const entryPrice = acc.active_position.entry_price || acc.active_position.price || 0;
+                    const amount = acc.active_position.amount || 100; // 默认100USDT
+                    
+                    document.getElementById('openTime30min').textContent = isNaN(opened.getTime()) ? '--' : opened.toLocaleString('zh-CN');
+                    document.getElementById('openPrice30min').textContent = '$' + entryPrice.toFixed(2);
+                    document.getElementById('openAmount30min').textContent = amount.toFixed(2) + ' USDT';
                     
                     // 计算当前盈亏
-                    const currentPrice = parseFloat(document.getElementById('btcPrice').textContent.replace(/[^0-9.]/g, '')) || acc.active_position.price;
-                    const priceDiff = isLong ? (currentPrice - acc.active_position.price) : (acc.active_position.price - currentPrice);
-                    const currentPnl = priceDiff * (acc.active_position.amount / acc.active_position.price);
+                    const currentPrice = parseFloat(document.getElementById('btcPrice').textContent.replace(/[^0-9.]/g, '')) || entryPrice;
+                    const priceDiff = isLong ? (currentPrice - entryPrice) : (entryPrice - currentPrice);
+                    const currentPnl = priceDiff * (amount / entryPrice);
                     const pnlEl = document.getElementById('currentPnl30min');
                     pnlEl.textContent = (currentPnl >= 0 ? '+' : '') + currentPnl.toFixed(2) + ' USDT';
                     pnlEl.style.color = currentPnl >= 0 ? '#00ff88' : '#ff4757';
                     
-                    document.getElementById('closeTime30min').textContent = closeTime.toLocaleString('zh-CN') + ` (${remaining.toFixed(1)}分钟后)`;
-                    countdownEl.textContent = ` ⏱️ ${remaining.toFixed(1)}分钟`;
+                    document.getElementById('closeTime30min').textContent = isNaN(closeTime.getTime()) ? '--' : (closeTime.toLocaleString('zh-CN') + ` (${remaining.toFixed(1)}分钟后)`);
+                    countdownEl.textContent = isNaN(remaining) ? '' : ` ⏱️ ${remaining.toFixed(1)}分钟`;
                 } else {
                     statusEl.textContent = '空仓';
                     statusEl.className = 'position-badge badge-empty';

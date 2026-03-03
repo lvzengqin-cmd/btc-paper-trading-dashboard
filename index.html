@@ -864,8 +864,9 @@
                     
                     const latestSignal = sourceSignals.length > 0 ? sourceSignals[0] : null;
                     
-                    // 更新价格显示
-                    priceEl.textContent = latestSignal ? `$${latestSignal.price?.toFixed(2) || currentPrice.toFixed(2)}` : `$${currentPrice.toFixed(2)}`;
+                    // 更新价格显示 - 优先使用实时价格
+                    const displayPrice = currentPrice > 0 ? currentPrice : (latestSignal?.price || 0);
+                    priceEl.textContent = displayPrice > 0 ? `$${displayPrice.toFixed(2)}` : '--';
                     
                     if (latestSignal && latestSignal.signal_type !== 'neutral') {
                         // 有交易信号
@@ -1529,9 +1530,11 @@
         // 初始化加载
         fetchBTCPriceWithRetry(); // 立即获取价格（带重试）
         loadData(); // 加载账户数据
+        updateMonitorMessages(); // 立即加载监控消息
         
         setInterval(fetchBTCPriceWithRetry, 5000); // 每5秒更新价格（带重试机制）
         setInterval(loadData, 10000); // 每10秒刷新账户数据
+        setInterval(updateMonitorMessages, 10000); // 每10秒刷新监控消息
     </script>
 </body>
 </html>

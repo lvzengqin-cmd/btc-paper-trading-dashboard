@@ -200,55 +200,42 @@
     }
   ],
   "ai_analysis": {
-    "latest_signals": [
-      {
-        "time": "2026-03-03T08:11:57.169609",
-        "source": "30min",
-        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,822.50\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 54.1)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
+    "current_model": "kimi-coding-v2.5",
+    "current_trend": {
+      "4H": "bullish",
+      "30M": "bullish",
+      "15M": "neutral",
+      "overall": "看涨"
+    },
+    "key_levels": {
+      "support": [
+        66000,
+        65500,
+        65000
+      ],
+      "resistance": [
+        66500,
+        67000,
+        67500
+      ]
+    },
+    "indicators": {
+      "RSI_4H": 62.5,
+      "RSI_30M": 58.3,
+      "RSI_15M": 45.2,
+      "MACD_4H": "bullish",
+      "MACD_30M": "bullish",
+      "BB_position": "中轨附近"
+    },
+    "model_prediction": {
+      "next_1h": {
+        "up": 65,
+        "down": 35
       },
-      {
-        "time": "2026-03-03T08:10:18.544574",
-        "source": "30min",
-        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🔥 强烈做多（30分钟周期）\n\n💰 当前价格: $68,908.40\n📊 信号强度: 5/5\n🎚️ 置信度: high\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: bullish (RSI: 64.9)\n\n📋 做单理由:\n  1. 大周期中性\n  2. 1分钟趋"
-      },
-      {
-        "time": "2026-03-03T08:06:58.913725",
-        "source": "30min",
-        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🔥 强烈做多（30分钟周期）\n\n💰 当前价格: $68,928.20\n📊 信号强度: 5/5\n🎚️ 置信度: high\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: bullish (RSI: 56.1)\n\n📋 做单理由:\n  1. 大周期中性\n  2. 1分钟趋"
-      },
-      {
-        "time": "2026-03-03T07:59:56.890952",
-        "source": "30min",
-        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,799.00\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 47.3)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
-      },
-      {
-        "time": "2026-03-03T07:57:57.100264",
-        "source": "30min",
-        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,770.80\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 45.3)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
-      },
-      {
-        "time": "2026-03-03T07:55:59.179774",
-        "source": "30min",
-        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,787.30\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 48.8)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
-      },
-      {
-        "time": "2026-03-03T07:54:00.548265",
-        "source": "30min",
-        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,845.90\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 57.1)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
-      },
-      {
-        "time": "2026-03-03T07:51:59.370033",
-        "source": "30min",
-        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,872.40\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 52.4)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
-      },
-      {
-        "time": "2026-03-03T07:49:59.539229",
-        "source": "30min",
-        "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,878.80\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 63.1)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MA"
-      }
-    ],
-    "signal_count_24h": 100,
-    "last_updated": "2026-03-03T16:29:04.793005"
+      "confidence": 0.68,
+      "suggested_action": "轻仓做多"
+    },
+    "last_updated": "2026-03-02T23:02:18.766762"
   },
   "performance": {
     "total_trades": 2,
@@ -259,6 +246,6 @@
     "best_trade": 100,
     "worst_trade": 85
   },
-  "_last_updated": "2026-03-03T16:29:04.792359",
+  "_last_updated": "2026-03-03T16:29:34.162958",
   "_sync_version": "2.0"
 }

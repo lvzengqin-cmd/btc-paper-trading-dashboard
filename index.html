@@ -366,57 +366,58 @@
                 </div>
             </div>
             
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">🤖 AI模型信息</div>
-                </div>
-                <div id="aiModelInfo" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <span style="color: #888;">当前模型</span>
-                        <span id="currentModel" style="font-weight: 600; color: #00d4ff;">Kimi-Coding-v2.5</span>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">🤖 AI模型信息</div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <span style="color: #888;">模型类型</span>
-                        <span>多周期技术分析</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: #888;">预测准确率</span>
-                        <span id="modelAccuracy" style="color: #ffa502;">--%</span>
+                    <div id="aiModelInfo" style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="color: #888;">当前模型</span>
+                            <span id="currentModel" style="font-weight: 600; color: #00d4ff;">Kimi-Coding-v2.5</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="color: #888;">模型类型</span>
+                            <span>多周期技术分析</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: #888;">预测准确率</span>
+                            <span id="modelAccuracy" style="color: #ffa502;">--%</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">🎯 AI预测</div>
-                    <div id="aiPredictionTime" style="font-size: 0.85em; color: #888;">--</div>
-                </div>
-                <div id="aiPrediction">
-                    <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                            <div>
-                                <div style="color: #888; margin-bottom: 5px;">未来1小时预测</div>
-                                <div style="display: flex; gap: 20px;">
-                                    <div>
-                                        <span style="color: #00ff88; font-size: 1.5em; font-weight: 700;">📈 </span>
-                                        <span id="predUp">--%</span>
-                                    </div>
-                                    <div>
-                                        <span style="color: #ff4757; font-size: 1.5em; font-weight: 700;">📉 </span>
-                                        <span id="predDown">--%</span>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">🎯 AI预测</div>
+                        <div id="aiPredictionTime" style="font-size: 0.85em; color: #888;">--</div>
+                    </div>
+                    <div id="aiPrediction">
+                        <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                <div>
+                                    <div style="color: #888; margin-bottom: 5px;">未来1小时预测</div>
+                                    <div style="display: flex; gap: 20px;">
+                                        <div>
+                                            <span style="color: #00ff88; font-size: 1.5em; font-weight: 700;">📈 </span>
+                                            <span id="predUp">--%</span>
+                                        </div>
+                                        <div>
+                                            <span style="color: #ff4757; font-size: 1.5em; font-weight: 700;">📉 </span>
+                                            <span id="predDown">--%</span>
+                                        </div>
                                     </div>
                                 </div>
+                                <div style="text-align: right;">
+                                    <div style="color: #888; margin-bottom: 5px;">置信度</div>
+                                    <div id="aiConfidence" style="font-size: 1.5em; font-weight: 700; color: #ffa502;">--</div>
+                                </div>
                             </div>
-                            <div style="text-align: right;">
-                                <div style="color: #888; margin-bottom: 5px;">置信度</div>
-                                <div id="aiConfidence" style="font-size: 1.5em; font-weight: 700; color: #ffa502;">--</div>
+                            
+                            <div style="padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                                <div style="color: #888; margin-bottom: 5px;">AI建议</div>
+                                <div id="aiSuggestion" style="font-size: 1.2em; font-weight: 600;">加载中...</div>
                             </div>
-                        </div>
-                        
-                        <div style="padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                            <div style="color: #888; margin-bottom: 5px;">AI建议</div>
-                            <div id="aiSuggestion" style="font-size: 1.2em; font-weight: 600;">加载中...</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -461,12 +462,14 @@
                 </div>
             </div>
             
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">📊 最近7天历史统计</div>
-                </div>
-                <div id="historyStats">
-                    <div style="text-align: center; color: #666; padding: 40px;">加载中...</div>
+            <div class="grid">
+                <div class="card full-width">
+                    <div class="card-header">
+                        <div class="card-title">📊 最近7天历史统计</div>
+                    </div>
+                    <div id="historyStats">
+                        <div style="text-align: center; color: #666; padding: 40px;">加载中...</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -518,8 +521,10 @@
                         </button>
                     </div>
                 </div>
-                
-                <div class="card">
+            </div>
+            
+            <div class="grid">
+                <div class="card full-width">
                     <div class="card-header">
                         <div class="card-title">📥 导出完整数据</div>
                     </div>

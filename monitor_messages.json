@@ -1,5 +1,35 @@
 [
   {
+    "timestamp": "2026-03-03T17:58:53.839634",
+    "source": "30min",
+    "type": "signal",
+    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $66,627.40\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: bearish (4H:neutral, 30M:bearish, 15M:bearish)\n  1分钟: bullish (RSI: 64.1)\n\n📋 做单理由:\n  1. 1分钟趋势看涨\n  2. MACD多头\n  3. 触及布林下轨($66361)\n\n📊 24h统计: 涨跌 +0.60%\n\n⏰ 17:58:53\n⚠️ 仅供参考，不构成投资建议"
+  },
+  {
+    "timestamp": "2026-03-03T17:58:41.984043",
+    "source": "30min",
+    "type": "signal",
+    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $66,602.10\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: bearish (4H:neutral, 30M:bearish, 15M:bearish)\n  1分钟: bullish (RSI: 62.0)\n\n📋 做单理由:\n  1. 1分钟趋势看涨\n  2. MACD多头\n  3. 触及布林下轨($66364)\n\n📊 24h统计: 涨跌 +0.56%\n\n⏰ 17:58:41\n⚠️ 仅供参考，不构成投资建议"
+  },
+  {
+    "timestamp": "2026-03-03T17:58:28.312249",
+    "source": "30min",
+    "type": "signal",
+    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟠 轻仓做空（30分钟周期）\n\n💰 当前价格: $66,605.50\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: bearish (4H:neutral, 30M:bearish, 15M:bearish)\n  1分钟: neutral (RSI: 60.6)\n\n📋 做单理由:\n  1. 大周期看跌(4H:neutral, 30M:bearish, 15M:bearish)\n  2. 触及布林上轨($66636)\n  3. 接近近期高点($66645)\n\n📊 24h统计: 涨跌 +0.57%\n\n⏰ 17:58:28\n⚠️ 仅供参考，不构成投资建议"
+  },
+  {
+    "timestamp": "2026-03-03T17:58:07.799434",
+    "source": "30min",
+    "type": "signal",
+    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $66,605.60\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: bearish (4H:neutral, 30M:bearish, 15M:bearish)\n  1分钟: bullish (RSI: 62.0)\n\n📋 做单理由:\n  1. 1分钟趋势看涨\n  2. MACD多头\n  3. 触及布林下轨($66364)\n\n📊 24h统计: 涨跌 +0.57%\n\n⏰ 17:58:07\n⚠️ 仅供参考，不构成投资建议"
+  },
+  {
+    "timestamp": "2026-03-03T17:58:01.256776",
+    "source": "30min",
+    "type": "signal",
+    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟠 轻仓做空（30分钟周期）\n\n💰 当前价格: $66,606.20\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: bearish (4H:neutral, 30M:bearish, 15M:bearish)\n  1分钟: neutral (RSI: 61.5)\n\n📋 做单理由:\n  1. 大周期看跌(4H:neutral, 30M:bearish, 15M:bearish)\n  2. 触及布林上轨($66646)\n  3. 接近近期高点($66686)\n\n📊 24h统计: 涨跌 +0.57%\n\n⏰ 17:58:01\n⚠️ 仅供参考，不构成投资建议"
+  },
+  {
     "timestamp": "2026-03-03T17:26:03.426760",
     "source": "30min",
     "type": "signal",
@@ -568,35 +598,5 @@
     "source": "30min",
     "type": "signal",
     "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🔥 强烈做多（30分钟周期）\n\n💰 当前价格: $68,928.20\n📊 信号强度: 5/5\n🎚️ 置信度: high\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: bullish (RSI: 56.1)\n\n📋 做单理由:\n  1. 大周期中性\n  2. 1分钟趋势看涨\n  3. MACD多头\n  4. 触及布林下轨($68728)\n  5. 接近近期低点($68728)\n\n📊 24h统计: 涨跌 +4.67%\n\n⏰ 08:06:58\n⚠️ 仅供参考，不构成投资建议"
-  },
-  {
-    "timestamp": "2026-03-03T07:59:56.890952",
-    "source": "30min",
-    "type": "signal",
-    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,799.00\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 47.3)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MACD多头\n  3. 触及布林下轨($68719)\n  4. 接近近期低点($68700)\n\n📊 24h统计: 涨跌 +4.72%\n\n⏰ 07:59:56\n⚠️ 仅供参考，不构成投资建议"
-  },
-  {
-    "timestamp": "2026-03-03T07:57:57.100264",
-    "source": "30min",
-    "type": "signal",
-    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,770.80\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 45.3)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MACD多头\n  3. 触及布林下轨($68733)\n  4. 接近近期低点($68700)\n\n📊 24h统计: 涨跌 +4.72%\n\n⏰ 07:57:57\n⚠️ 仅供参考，不构成投资建议"
-  },
-  {
-    "timestamp": "2026-03-03T07:55:59.179774",
-    "source": "30min",
-    "type": "signal",
-    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,787.30\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 48.8)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MACD多头\n  3. 触及布林下轨($68746)\n  4. 接近近期低点($68700)\n\n📊 24h统计: 涨跌 +4.75%\n\n⏰ 07:55:59\n⚠️ 仅供参考，不构成投资建议"
-  },
-  {
-    "timestamp": "2026-03-03T07:54:00.548265",
-    "source": "30min",
-    "type": "signal",
-    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,845.90\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 57.1)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MACD多头\n  3. 触及布林下轨($68750)\n  4. 接近近期低点($68700)\n\n📊 24h统计: 涨跌 +4.84%\n\n⏰ 07:54:00\n⚠️ 仅供参考，不构成投资建议"
-  },
-  {
-    "timestamp": "2026-03-03T07:51:59.370033",
-    "source": "30min",
-    "type": "signal",
-    "content": "\n🚨 【30分钟周期监控系统】交易信号\n\n🟡 轻仓做多（30分钟周期）\n\n💰 当前价格: $68,872.40\n📊 信号强度: 3/5\n🎚️ 置信度: medium\n\n📈 趋势状态:\n  大周期: neutral (4H:bullish, 30M:neutral, 15M:bearish)\n  1分钟: neutral (RSI: 52.4)\n\n📋 做单理由:\n  1. 大周期中性\n  2. MACD多头\n  3. 触及布林下轨($68750)\n  4. 接近近期低点($68700)\n\n📊 24h统计: 涨跌 +4.74%\n\n⏰ 07:51:59\n⚠️ 仅供参考，不构成投资建议"
   }
 ]

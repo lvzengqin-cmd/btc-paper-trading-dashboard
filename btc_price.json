@@ -1,9 +1,9 @@
 {
-  "price": 66518.0,
-  "change_percent": 0.305,
+  "price": 66494.9,
+  "change_percent": 0.406,
   "high": 70100.0,
   "low": 65234.4,
-  "timestamp": "2026-03-03T17:47:03.025375",
+  "timestamp": "2026-03-03T17:54:16.874823",
   "source": "binance",
-  "_sync_time": "2026-03-03T17:47:03.025381"
+  "_sync_time": "2026-03-03T17:54:16.874829"
 }
